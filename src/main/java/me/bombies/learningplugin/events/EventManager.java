@@ -1,5 +1,6 @@
 package me.bombies.learningplugin.events;
 
+import me.bombies.learningplugin.commands.misc.login.events.LoginFreezeEvent;
 import me.bombies.learningplugin.events.welcomer.PlayerWelcomeEvent;
 import me.bombies.learningplugin.events.xpbottle.XPBottleBreakListener;
 import org.bukkit.event.Listener;
@@ -23,7 +24,8 @@ public class EventManager {
 
         addListeners(
                 new PlayerWelcomeEvent(),
-                new XPBottleBreakListener()
+                new XPBottleBreakListener(),
+                new LoginFreezeEvent()
         );
     }
 
