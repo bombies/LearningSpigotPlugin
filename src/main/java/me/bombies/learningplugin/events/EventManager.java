@@ -1,6 +1,7 @@
 package me.bombies.learningplugin.events;
 
 import me.bombies.learningplugin.events.welcomer.PlayerWelcomeEvent;
+import me.bombies.learningplugin.events.xpbottle.XPBottleBreakListener;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -21,7 +22,8 @@ public class EventManager {
         this.plugin = plugin;
 
         addListeners(
-                new PlayerWelcomeEvent()
+                new PlayerWelcomeEvent(),
+                new XPBottleBreakListener()
         );
     }
 
