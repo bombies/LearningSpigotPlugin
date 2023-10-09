@@ -24,8 +24,8 @@ public class EventManager {
 
         addListeners(
                 new PlayerWelcomeEvent(),
-                new XPBottleBreakListener(),
-                new LoginFreezeEvent()
+                new XPBottleBreakListener()
+//                new LoginFreezeEvent()
         );
     }
 
