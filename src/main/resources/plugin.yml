@@ -17,7 +17,7 @@ commands:
     aliases: [ kms, die ]
   fly:
     description: Fly!
-    usage: /<command>
+    usage: /<command> [player]
 
 permissions:
   learningplugin.*:
@@ -25,5 +25,12 @@ permissions:
     children: {
       learingplugin.fly: true
     }
+  learningplugin.fly.*:
+    description: Gives a user access to all fly permissions
+    children:
+      - learningplugin.fly
+      - learningplugin.fly.others
   learningplugin.fly:
     description: Allows a user to fly
+  learningplugin.fly.others:
+    description: Allows a user to toggle fly for other users

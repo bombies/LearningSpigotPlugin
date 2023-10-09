@@ -26,6 +26,14 @@ public class CommandArgs {
         return args.get(index);
     }
 
+    public String first() {
+        return args.get(0);
+    }
+
+    public String last() {
+        return args.get(args.size() - 1);
+    }
+
     public int length() {
         return args.size();
     }

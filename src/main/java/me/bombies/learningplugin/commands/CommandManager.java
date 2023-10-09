@@ -1,6 +1,6 @@
 package me.bombies.learningplugin.commands;
 
-import me.bombies.learningplugin.commands.misc.FlyCommand;
+import me.bombies.learningplugin.commands.misc.fly.FlyCommand;
 import me.bombies.learningplugin.commands.misc.login.LoginCommand;
 import me.bombies.learningplugin.commands.misc.SuicideCommand;
 import me.bombies.learningplugin.commands.utils.PlayerCommand;

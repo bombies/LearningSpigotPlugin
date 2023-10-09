@@ -6,9 +6,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LearningPlugin extends JavaPlugin {
 
+    public static JavaPlugin core = null;
+
     @Override
     public void onEnable() {
         System.out.println("LearningPlugin enabled!");
+        core = this;
+
         EventManager.getInstance(this).registerEvents();
         CommandManager.getInstance(this).registerCommands();
     }
