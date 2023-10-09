@@ -1,7 +1,7 @@
 package me.bombies.learningplugin.commands.misc;
 
 import me.bombies.learningplugin.commands.utils.PlayerCommand;
-import me.bombies.learningplugin.commands.utils.CommandArgs;
+import me.bombies.learningplugin.commands.utils.CommandContext;
 import me.bombies.learningplugin.utils.Permissions;
 import me.bombies.learningplugin.utils.messages.DefaultMessage;
 import me.bombies.learningplugin.utils.messages.MessageUtils;
@@ -14,7 +14,7 @@ public class FlyCommand extends PlayerCommand {
     }
 
     @Override
-    public void handle(CommandArgs args) {
+    public void handle(CommandContext args) {
         final Player player = args.getPlayer();
         if (!player.hasPermission(Permissions.FLY)) {
             player.sendMessage(DefaultMessage.INSUFFICIENT_PERMS);

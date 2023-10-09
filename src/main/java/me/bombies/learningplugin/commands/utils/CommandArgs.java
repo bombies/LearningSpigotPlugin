@@ -1,36 +1,36 @@
 package me.bombies.learningplugin.commands.utils;
 
-import org.bukkit.command.Command;
-import org.bukkit.entity.Player;
-
 import java.util.List;
 
 public class CommandArgs {
-    private final Player player;
-    private final Command command;
-    private final String label;
+
     private final List<String> args;
 
-    protected CommandArgs(Player player, Command command, String label, List<String> args) {
-        this.player = player;
-        this.command = command;
-        this.label = label;
+    protected CommandArgs(List<String> args) {
         this.args = args;
     }
 
-    public Player getPlayer() {
-        return player;
+    public String join(CharSequence delimiter) {
+        return String.join(delimiter, args);
     }
 
-    public Command getCommand() {
-        return command;
+    public String join(int fromIndex, CharSequence delimiter) {
+        return String.join(delimiter, args.subList(fromIndex, args.size()));
     }
 
-    public String getLabel() {
-        return label;
+    public String join(int fromIndex, int toIndex, CharSequence delimiter) {
+        return String.join(delimiter, args.subList(fromIndex, toIndex));
     }
 
-    public List<String> getArgs() {
-        return args;
+    public String get(int index) {
+        return args.get(index);
+    }
+
+    public int length() {
+        return args.size();
+    }
+
+    public boolean isEmpty() {
+        return args.isEmpty();
     }
 }

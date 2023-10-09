@@ -22,11 +22,11 @@ public abstract class PlayerCommand implements CommandExecutor {
             return true;
         }
 
-        handle(new CommandArgs((Player) sender, command, label, Arrays.asList(args)));
+        handle(new CommandContext((Player) sender, command, label, Arrays.asList(args)));
         return true;
     }
 
-    public abstract void handle(CommandArgs commandArgs);
+    public abstract void handle(CommandContext commandContext);
 
     public String getCommandName() {
         return commandName;
