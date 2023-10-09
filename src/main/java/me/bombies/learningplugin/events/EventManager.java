@@ -14,9 +14,9 @@ public class EventManager {
 
     private static EventManager instance;
 
-    private Plugin plugin;
-    private PluginManager pluginManager;
-    private ArrayList<Listener> eventListeners = new ArrayList<>();
+    private final Plugin plugin;
+    private final PluginManager pluginManager;
+    private final ArrayList<Listener> eventListeners = new ArrayList<>();
 
     private EventManager(Plugin plugin) {
         this.pluginManager = plugin.getServer().getPluginManager();
