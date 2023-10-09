@@ -10,3 +10,20 @@ commands:
   login:
     description: Login to the server
     usage: /<command>
+    aliases: [ signin, logon ]
+  suicide:
+    description: Kill yourself
+    usage: /<command>
+    aliases: [ kms, die ]
+  fly:
+    description: Fly!
+    usage: /<command>
+
+permissions:
+  learningplugin.*:
+    description: Gives a user access to every permission
+    children: {
+      learingplugin.fly: true
+    }
+  learningplugin.fly:
+    description: Allows a user to fly

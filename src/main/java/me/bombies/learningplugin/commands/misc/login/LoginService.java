@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class LoginService {
-    private static ArrayList<UUID> loggedInPlayers = new ArrayList<>();
+    private static final ArrayList<UUID> loggedInPlayers = new ArrayList<>();
 
     public static boolean playerIsLoggedIn(Player player) {
         return loggedInPlayers.contains(player.getUniqueId());

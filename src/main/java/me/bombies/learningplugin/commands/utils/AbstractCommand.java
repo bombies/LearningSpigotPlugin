@@ -1,16 +1,19 @@
-package me.bombies.learningplugin.commands;
+package me.bombies.learningplugin.commands.utils;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class AbstractCommand implements CommandExecutor {
 
-    private String commandName;
+    private final String commandName;
 
     public AbstractCommand(String commandName) {
-        this.commandName = commandName;
+        this.commandName = commandName.toLowerCase();
     }
 
     @Override
@@ -20,11 +23,11 @@ public abstract class AbstractCommand implements CommandExecutor {
             return true;
         }
 
-        handle((Player) sender, command, label, args);
+        handle(new CommandArgs((Player) sender, command, label, Arrays.asList(args)));
         return true;
     }
 
-    public abstract void handle(Player player, Command command, String label, String[] args);
+    public abstract void handle(CommandArgs commandArgs);
 
     public String getCommandName() {
         return commandName;

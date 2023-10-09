@@ -1,7 +1,7 @@
 package me.bombies.learningplugin.commands.misc.login.events;
 
 import me.bombies.learningplugin.commands.misc.login.LoginService;
-import me.bombies.learningplugin.utils.MessageUtils;
+import me.bombies.learningplugin.utils.messages.MessageUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

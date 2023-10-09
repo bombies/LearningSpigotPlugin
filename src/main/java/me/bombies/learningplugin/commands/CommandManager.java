@@ -1,6 +1,9 @@
 package me.bombies.learningplugin.commands;
 
+import me.bombies.learningplugin.commands.misc.FlyCommand;
 import me.bombies.learningplugin.commands.misc.login.LoginCommand;
+import me.bombies.learningplugin.commands.misc.SuicideCommand;
+import me.bombies.learningplugin.commands.utils.AbstractCommand;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,7 +21,9 @@ public class CommandManager {
         this.plugin = plugin;
 
         addCommands(
-                new LoginCommand()
+                new LoginCommand(),
+                new SuicideCommand(),
+                new FlyCommand()
         );
     }
 

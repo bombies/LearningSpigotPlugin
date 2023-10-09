@@ -1,4 +1,4 @@
-package me.bombies.learningplugin.utils;
+package me.bombies.learningplugin.utils.messages;
 
 import org.bukkit.ChatColor;
 
