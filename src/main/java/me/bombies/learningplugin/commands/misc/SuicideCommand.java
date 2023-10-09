@@ -1,11 +1,11 @@
 package me.bombies.learningplugin.commands.misc;
 
-import me.bombies.learningplugin.commands.utils.AbstractCommand;
+import me.bombies.learningplugin.commands.utils.PlayerCommand;
 import me.bombies.learningplugin.commands.utils.CommandArgs;
 import me.bombies.learningplugin.utils.messages.MessageUtils;
 import org.bukkit.entity.Player;
 
-public class SuicideCommand extends AbstractCommand {
+public class SuicideCommand extends PlayerCommand {
     public SuicideCommand() {
         super("suicide");
     }

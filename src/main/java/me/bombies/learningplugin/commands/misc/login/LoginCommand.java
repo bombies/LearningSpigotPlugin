@@ -1,11 +1,11 @@
 package me.bombies.learningplugin.commands.misc.login;
 
-import me.bombies.learningplugin.commands.utils.AbstractCommand;
+import me.bombies.learningplugin.commands.utils.PlayerCommand;
 import me.bombies.learningplugin.commands.utils.CommandArgs;
 import me.bombies.learningplugin.utils.messages.MessageUtils;
 import org.bukkit.entity.Player;
 
-public class LoginCommand extends AbstractCommand {
+public class LoginCommand extends PlayerCommand {
 
     public LoginCommand() {
         super("login");

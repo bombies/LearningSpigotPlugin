@@ -3,7 +3,7 @@ package me.bombies.learningplugin.commands;
 import me.bombies.learningplugin.commands.misc.FlyCommand;
 import me.bombies.learningplugin.commands.misc.login.LoginCommand;
 import me.bombies.learningplugin.commands.misc.SuicideCommand;
-import me.bombies.learningplugin.commands.utils.AbstractCommand;
+import me.bombies.learningplugin.commands.utils.PlayerCommand;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,7 +15,7 @@ public class CommandManager {
     private static CommandManager instance;
 
     private final JavaPlugin plugin;
-    private final ArrayList<AbstractCommand> commands = new ArrayList<>();
+    private final ArrayList<PlayerCommand> commands = new ArrayList<>();
 
     private CommandManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -34,7 +34,7 @@ public class CommandManager {
     }
 
     public void registerCommands() {
-        for (AbstractCommand command : commands) {
+        for (PlayerCommand command : commands) {
             final PluginCommand pluginCommand = plugin.getCommand(command.getCommandName());
             if (pluginCommand == null) {
                 System.out.println("The command " + command.getCommandName() + " does not exist in the plugin's plugin.yml!");
@@ -46,7 +46,7 @@ public class CommandManager {
 
     }
 
-    private void addCommands(AbstractCommand... commands) {
+    private void addCommands(PlayerCommand... commands) {
         this.commands.addAll(Arrays.asList(commands));
     }
 }

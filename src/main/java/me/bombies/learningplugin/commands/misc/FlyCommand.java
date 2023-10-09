@@ -1,13 +1,13 @@
 package me.bombies.learningplugin.commands.misc;
 
-import me.bombies.learningplugin.commands.utils.AbstractCommand;
+import me.bombies.learningplugin.commands.utils.PlayerCommand;
 import me.bombies.learningplugin.commands.utils.CommandArgs;
 import me.bombies.learningplugin.utils.Permissions;
 import me.bombies.learningplugin.utils.messages.DefaultMessage;
 import me.bombies.learningplugin.utils.messages.MessageUtils;
 import org.bukkit.entity.Player;
 
-public class FlyCommand extends AbstractCommand {
+public class FlyCommand extends PlayerCommand {
 
     public FlyCommand() {
         super("fly");

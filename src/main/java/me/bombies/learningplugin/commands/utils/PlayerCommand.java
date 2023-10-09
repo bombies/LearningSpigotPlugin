@@ -6,13 +6,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
-import java.util.List;
 
-public abstract class AbstractCommand implements CommandExecutor {
+public abstract class PlayerCommand implements CommandExecutor {
 
     private final String commandName;
 
-    public AbstractCommand(String commandName) {
+    public PlayerCommand(String commandName) {
         this.commandName = commandName.toLowerCase();
     }
 
