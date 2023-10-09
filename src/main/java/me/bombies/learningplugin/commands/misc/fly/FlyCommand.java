@@ -40,7 +40,7 @@ public class FlyCommand extends PlayerCommand {
                 return;
             }
 
-            FlyService.toggleFly(target, false);
+            FlyService.toggleFly(target, target.getUniqueId() == player.getUniqueId());
         }
     }
 }
