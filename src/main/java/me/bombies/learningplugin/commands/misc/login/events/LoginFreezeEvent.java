@@ -1,15 +1,14 @@
 package me.bombies.learningplugin.commands.misc.login.events;
 
 import me.bombies.learningplugin.commands.misc.login.LoginService;
+import me.bombies.learningplugin.events.EventListenerAdapter;
 import me.bombies.learningplugin.utils.messages.MessageUtils;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-public class LoginFreezeEvent implements Listener {
+public class LoginFreezeEvent implements EventListenerAdapter {
 
-    @EventHandler
+    @Override
     public void onPlayerMove(PlayerMoveEvent e) {
         final Player player = e.getPlayer();
         if (LoginService.playerIsLoggedIn(player))

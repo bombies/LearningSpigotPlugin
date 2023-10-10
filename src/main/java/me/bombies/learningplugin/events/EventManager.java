@@ -1,6 +1,7 @@
 package me.bombies.learningplugin.events;
 
-import me.bombies.learningplugin.commands.misc.login.events.LoginFreezeEvent;
+import me.bombies.learningplugin.LearningPlugin;
+import me.bombies.learningplugin.events.blockbreaksound.BlockBreakListener;
 import me.bombies.learningplugin.events.welcomer.PlayerWelcomeEvent;
 import me.bombies.learningplugin.events.xpbottle.XPBottleBreakListener;
 import org.bukkit.event.Listener;
@@ -18,13 +19,14 @@ public class EventManager {
     private final PluginManager pluginManager;
     private final ArrayList<Listener> eventListeners = new ArrayList<>();
 
-    private EventManager(Plugin plugin) {
-        this.pluginManager = plugin.getServer().getPluginManager();
-        this.plugin = plugin;
+    private EventManager() {
+        this.pluginManager = LearningPlugin.core.getServer().getPluginManager();
+        this.plugin = LearningPlugin.core;
 
         addListeners(
                 new PlayerWelcomeEvent(),
-                new XPBottleBreakListener()
+                new XPBottleBreakListener(),
+                new BlockBreakListener()
 //                new LoginFreezeEvent()
         );
     }
@@ -34,9 +36,9 @@ public class EventManager {
             pluginManager.registerEvents(eventListener, plugin);
     }
 
-    public static EventManager getInstance(Plugin plugin) {
+    public static EventManager getInstance() {
         if (instance == null)
-            instance = new EventManager(plugin);
+            instance = new EventManager();
         return instance;
     }
 

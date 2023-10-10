@@ -10,16 +10,16 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerWelcomeEvent implements Listener {
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        final Player player = event.getPlayer();
-        event.setJoinMessage(String.format("Welcome to the server, %s!", player.getName()));
-    }
-
-    @EventHandler
-    public void onPlayerLeave(PlayerQuitEvent event) {
+    public void onPlayerQuit(PlayerQuitEvent event) {
         final Player player = event.getPlayer();
         LoginService.removeLoggedInUser(player);
         event.setQuitMessage(String.format("%s left the server", player.getName()));
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        final Player player = event.getPlayer();
+        event.setJoinMessage(String.format("Welcome to the server, %s!", player.getName()));
     }
 
 }

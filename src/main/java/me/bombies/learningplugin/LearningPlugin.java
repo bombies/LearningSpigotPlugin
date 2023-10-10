@@ -13,7 +13,7 @@ public final class LearningPlugin extends JavaPlugin {
         System.out.println("LearningPlugin enabled!");
         core = this;
 
-        EventManager.getInstance(this).registerEvents();
+        EventManager.getInstance().registerEvents();
         CommandManager.getInstance(this).registerCommands();
     }
 

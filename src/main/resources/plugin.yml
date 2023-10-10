@@ -18,6 +18,10 @@ commands:
   fly:
     description: Fly!
     usage: /<command> [player]
+  workbench:
+    description: Open a crafting table
+    usage: /<command>
+    aliases: [ wb, craft ]
 
 permissions:
   learningplugin.*:
