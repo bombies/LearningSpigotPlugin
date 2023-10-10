@@ -4,6 +4,7 @@ import me.bombies.learningplugin.commands.misc.WorkBenchCommand;
 import me.bombies.learningplugin.commands.misc.fly.FlyCommand;
 import me.bombies.learningplugin.commands.misc.login.LoginCommand;
 import me.bombies.learningplugin.commands.misc.SuicideCommand;
+import me.bombies.learningplugin.commands.misc.nick.NickCommand;
 import me.bombies.learningplugin.commands.utils.PlayerCommand;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,7 +26,8 @@ public class CommandManager {
                 new LoginCommand(),
                 new SuicideCommand(),
                 new FlyCommand(),
-                new WorkBenchCommand()
+                new WorkBenchCommand(),
+                new NickCommand()
         );
     }
 

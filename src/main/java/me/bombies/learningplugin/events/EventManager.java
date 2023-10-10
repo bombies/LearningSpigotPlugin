@@ -2,6 +2,7 @@ package me.bombies.learningplugin.events;
 
 import me.bombies.learningplugin.LearningPlugin;
 import me.bombies.learningplugin.events.blockbreaksound.BlockBreakListener;
+import me.bombies.learningplugin.events.customchat.CustomChatEvent;
 import me.bombies.learningplugin.events.welcomer.PlayerWelcomeEvent;
 import me.bombies.learningplugin.events.xpbottle.XPBottleBreakListener;
 import org.bukkit.event.Listener;
@@ -26,7 +27,8 @@ public class EventManager {
         addListeners(
                 new PlayerWelcomeEvent(),
                 new XPBottleBreakListener(),
-                new BlockBreakListener()
+                new BlockBreakListener(),
+                new CustomChatEvent()
 //                new LoginFreezeEvent()
         );
     }

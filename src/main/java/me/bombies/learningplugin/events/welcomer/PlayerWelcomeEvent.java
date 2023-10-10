@@ -1,6 +1,7 @@
 package me.bombies.learningplugin.events.welcomer;
 
 import me.bombies.learningplugin.commands.misc.login.LoginService;
+import me.bombies.learningplugin.commands.misc.nick.NickService;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,6 +20,11 @@ public class PlayerWelcomeEvent implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
+
+        final String nickName = NickService.getNickname(player.getUniqueId());
+        if (nickName != null)
+            player.setDisplayName(nickName);
+
         event.setJoinMessage(String.format("Welcome to the server, %s!", player.getName()));
     }
 
