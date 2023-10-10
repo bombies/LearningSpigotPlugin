@@ -1,5 +1,7 @@
 package me.bombies.learningplugin.commands;
 
+import me.bombies.learningplugin.commands.management.spawn.SetSpawnCommand;
+import me.bombies.learningplugin.commands.management.spawn.SpawnCommand;
 import me.bombies.learningplugin.commands.misc.WorkBenchCommand;
 import me.bombies.learningplugin.commands.misc.fly.FlyCommand;
 import me.bombies.learningplugin.commands.misc.login.LoginCommand;
@@ -27,7 +29,9 @@ public class CommandManager {
                 new SuicideCommand(),
                 new FlyCommand(),
                 new WorkBenchCommand(),
-                new NickCommand()
+                new NickCommand(),
+                new SetSpawnCommand(),
+                new SpawnCommand()
         );
     }
 

@@ -1,6 +1,7 @@
 package me.bombies.learningplugin.events;
 
 import me.bombies.learningplugin.LearningPlugin;
+import me.bombies.learningplugin.commands.management.spawn.events.RespawnTeleportEvent;
 import me.bombies.learningplugin.events.blockbreaksound.BlockBreakListener;
 import me.bombies.learningplugin.events.customchat.CustomChatEvent;
 import me.bombies.learningplugin.events.welcomer.PlayerWelcomeEvent;
@@ -28,7 +29,8 @@ public class EventManager {
                 new PlayerWelcomeEvent(),
                 new XPBottleBreakListener(),
                 new BlockBreakListener(),
-                new CustomChatEvent()
+                new CustomChatEvent(),
+                new RespawnTeleportEvent()
 //                new LoginFreezeEvent()
         );
     }

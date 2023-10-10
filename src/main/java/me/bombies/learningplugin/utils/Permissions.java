@@ -8,4 +8,6 @@ public class Permissions {
 
     public final static String NICK = NODE_PREFIX + "nick";
     public final static String NICK_OTHERS = NODE_PREFIX + "nick.others";
+
+    public final static String SET_SPAWN = NODE_PREFIX + "spawn.set";
 }

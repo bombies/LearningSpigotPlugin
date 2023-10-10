@@ -26,18 +26,24 @@ commands:
     description: Nickname yourself or another player
     usage: /<command> [target] nickname
     aliases: [ nickname ]
-
+  setspawn:
+    description: Set the spawn for the server
+    usage: /<command>
+  spawn:
+    description: Teleport to the server spawn
+    usage: /<command>
 permissions:
   learningplugin.*:
     description: Gives a user access to every permission
     children:
-      - learingplugin.fly.*
-      - learingplugin.nick.*
+      learingplugin.fly.*: true
+      learingplugin.nick.*: true
+      learningplugin.spawn.set: true
   learningplugin.fly.*:
     description: Gives a user access to all fly permissions
     children:
-      - learningplugin.fly
-      - learningplugin.fly.others
+      learningplugin.fly: true
+      learningplugin.fly.others: true
   learningplugin.fly:
     description: Allows a user to fly
   learningplugin.fly.others:
@@ -45,9 +51,14 @@ permissions:
   learningplugin.nick.*:
     description: Gives a user access to all nick permissions
     children:
-      - learningplugin.nick
-      - learningplugin.nick.others
+      learningplugin.nick: true
+      learningplugin.nick.others: true
   learningplugin.nick:
     description: Allows a user to nickname themselves
   learningplugin.nick.others:
     description: Allows a user to nickname other users
+  learningplugin.spawn.set:
+    description: Allows a user to set the server spawn
+  learningplugin.spawn:
+    default: true
+    description: Allows a user to teleport to the server spawn
