@@ -1,11 +1,14 @@
 package me.bombies.learningplugin.commands.menu;
 
+import me.bombies.learningplugin.utils.menus.MenuItem;
 import me.bombies.learningplugin.utils.messages.MessageUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 public class MenuEventListener implements Listener {
 
@@ -24,9 +27,28 @@ public class MenuEventListener implements Listener {
         if (item == null)
             return;
 
-        switch (item.getType()) {
-            case DIAMOND_SWORD ->  {
+        final var itemMeta = item.getItemMeta();
+        if (itemMeta == null)
+            return;
+
+        final var itemDataContainer = itemMeta.getPersistentDataContainer();
+        if (!itemDataContainer.has(MenuItem.MENU_ITEM_KEY, PersistentDataType.STRING))
+            return;
+
+        final var itemID = itemDataContainer.get(MenuItem.MENU_ITEM_KEY, PersistentDataType.STRING);
+
+        if (itemID == null)
+            return;
+
+        switch (itemID) {
+            case "custom_item" -> {
                 player.sendMessage(MessageUtils.color("&eI told you it does nothing..."));
+                player.closeInventory();
+            }
+            case "custom_item_2" -> {
+                final var playerInventory = player.getInventory();
+                playerInventory.addItem(new ItemStack(Material.DIAMOND, 1));
+                player.sendMessage(MessageUtils.color("&aI told you it does something!"));
                 player.closeInventory();
             }
         }
