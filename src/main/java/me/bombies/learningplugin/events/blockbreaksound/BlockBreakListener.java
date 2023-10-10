@@ -27,7 +27,7 @@ public class BlockBreakListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         final Player player = event.getPlayer();
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1f, 1.5f);
-        spawnFireworks(player.getLocation(), 1);
+        spawnFireworks(player.getLocation());
     }
 
     @EventHandler
@@ -40,7 +40,7 @@ public class BlockBreakListener implements Listener {
             event.setCancelled(true);
     }
 
-    public static void spawnFireworks(Location location, int amount) {
+    public static void spawnFireworks(Location location) {
         final World world = location.getWorld();
         if (world == null)
             return;
@@ -48,7 +48,7 @@ public class BlockBreakListener implements Listener {
         Firework fw = (Firework) world.spawnEntity(location, EntityType.FIREWORK);
         FireworkMeta fwm = fw.getFireworkMeta();
 
-        fwm.setPower(2);
+        fwm.setPower(0);
         fwm.addEffect(FireworkEffect.builder()
                 .withColor(Color.LIME)
                 .flicker(true)
@@ -62,10 +62,5 @@ public class BlockBreakListener implements Listener {
         fw.setMetadata("block_break_firework", new FixedMetadataValue(LearningPlugin.core, "block_break_firework"));
 
         fw.detonate();
-
-        for (int i = 0; i < amount; i++) {
-            Firework fw2 = (Firework) world.spawnEntity(location, EntityType.FIREWORK);
-            fw2.setFireworkMeta(fwm);
-        }
     }
 }
