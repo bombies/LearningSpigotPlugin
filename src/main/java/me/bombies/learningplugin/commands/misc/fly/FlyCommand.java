@@ -27,7 +27,9 @@ public class FlyCommand extends PlayerCommand {
                 return true;
             }
 
-            FlyService.toggleFly(player, true);
+            if (FlyService.toggleFly(player))
+                player.sendMessage(MessageUtils.color("&aFly mode has been enabled for you!"));
+            else player.sendMessage(MessageUtils.color("&cFly mode has been disabled for you!"));
         } else {
             if (!player.hasPermission(Permissions.FLY_OTHERS)) {
                 player.sendMessage(DefaultMessage.INSUFFICIENT_PERMS);
@@ -40,7 +42,13 @@ public class FlyCommand extends PlayerCommand {
                 return true;
             }
 
-            FlyService.toggleFly(target, target.getUniqueId() == player.getUniqueId());
+            if (FlyService.toggleFly(target)) {
+                player.sendMessage(MessageUtils.color("&aYou have enabled fly for &e" + target.getName()));
+                target.sendMessage(MessageUtils.color("&aFly mode has been enabled for you!"));
+            } else {
+                player.sendMessage(MessageUtils.color("&cYou have disabled fly for &e" + target.getName()));
+                target.sendMessage(MessageUtils.color("&cFly mode has been disabled for you!"));
+            }
         }
 
         return true;

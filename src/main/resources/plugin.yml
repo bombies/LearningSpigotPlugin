@@ -35,6 +35,12 @@ commands:
   worlds:
     description: View and manage server worlds
     usage: /<command> [options]
+  menu:
+    description: Open a custom menu
+    usage: /<command>
+  invsee:
+    description: View another player's inventory.
+    usage: /<command> player
 permissions:
   learningplugin.*:
     description: Gives a user access to every permission
@@ -42,6 +48,7 @@ permissions:
       learingplugin.fly.*: true
       learingplugin.nick.*: true
       learningplugin.spawn.set: true
+      learningplugin.invsee.*: true
   learningplugin.fly.*:
     description: Gives a user access to all fly permissions
     children:
@@ -74,3 +81,12 @@ permissions:
     description: Allows a user to view the server worlds
   learningplugin.worlds.create:
     description: Allows a user to create a new world
+  learningplugin.invsee.*:
+    description: Gives a user access to all invsee permissions
+    children:
+      learningplugin.invsee: true
+      learningplugin.invsee.move: true
+  learningplugin.invsee:
+    description: Allows a user to view another player's inventory
+  learningplugin.invsee.move:
+    description: Allows a user to move items in another player's inventory

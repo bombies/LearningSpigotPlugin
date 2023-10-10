@@ -13,4 +13,7 @@ public class Permissions {
 
     public final static String VIEW_WORLDS = NODE_PREFIX + "worlds.view";
     public final static String CREATE_WORLDS = NODE_PREFIX + "worlds.create";
+
+    public final static String INV_SEE = NODE_PREFIX + "invsee";
+    public final static String INV_SEE_MOVE = NODE_PREFIX + "invsee.move";
 }

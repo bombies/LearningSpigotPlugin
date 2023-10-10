@@ -1,11 +1,12 @@
 package me.bombies.learningplugin.events;
 
 import me.bombies.learningplugin.LearningPlugin;
-import me.bombies.learningplugin.commands.management.spawn.events.RespawnTeleportEvent;
-import me.bombies.learningplugin.events.blockbreaksound.BlockBreakListener;
-import me.bombies.learningplugin.events.customchat.CustomChatEvent;
-import me.bombies.learningplugin.events.welcomer.PlayerWelcomeEvent;
-import me.bombies.learningplugin.events.xpbottle.XPBottleBreakListener;
+import me.bombies.learningplugin.commands.management.spawn.events.RespawnTeleportEventListener;
+import me.bombies.learningplugin.commands.menu.MenuEventListener;
+import me.bombies.learningplugin.commands.misc.invsee.InventorySeeMoveEventListener;
+import me.bombies.learningplugin.events.customchat.CustomChatEventListener;
+import me.bombies.learningplugin.events.weather.RainEventListener;
+import me.bombies.learningplugin.events.welcomer.PlayerWelcomeEventListener;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -26,12 +27,15 @@ public class EventManager {
         this.plugin = LearningPlugin.core;
 
         addListeners(
-                new PlayerWelcomeEvent(),
-                new XPBottleBreakListener(),
-                new BlockBreakListener(),
-                new CustomChatEvent(),
-                new RespawnTeleportEvent()
+                new PlayerWelcomeEventListener(),
+//                new XPBottleBreakListener(),
+//                new BlockBreakListener(),
 //                new LoginFreezeEvent()
+                new CustomChatEventListener(),
+                new RespawnTeleportEventListener(),
+                new RainEventListener(),
+                new MenuEventListener(),
+                new InventorySeeMoveEventListener()
         );
     }
 

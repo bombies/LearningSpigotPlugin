@@ -5,13 +5,13 @@ import org.bukkit.entity.Player;
 
 public class FlyService {
 
-    public static void toggleFly(Player player, boolean isSelf) {
+    public static boolean toggleFly(Player player) {
         if (player.getAllowFlight()) {
             player.setAllowFlight(false);
-            player.sendMessage(MessageUtils.color("&cYou have disabled fly" + (!isSelf ? " for &e" + player.getName() : "")));
+            return false;
         } else {
             player.setAllowFlight(true);
-            player.sendMessage(MessageUtils.color("&aYou have enabled fly" + (!isSelf ? " for &e" + player.getName() : "")));
+            return true;
         }
     }
 }
