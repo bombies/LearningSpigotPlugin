@@ -1,6 +1,6 @@
 package me.bombies.learningplugin;
 
-import me.bombies.learningplugin.commands.CommandManager;
+import me.bombies.learningplugin.commands.utils.CommandManager;
 import me.bombies.learningplugin.events.EventManager;
 import org.bukkit.Server;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -25,7 +25,7 @@ public final class LearningPlugin extends JavaPlugin {
         logger = core.getLogger();
 
         EventManager.getInstance().registerEvents();
-        CommandManager.getInstance(this).registerCommands();
+        CommandManager.getInstance().registerCommands();
     }
 
     @Override

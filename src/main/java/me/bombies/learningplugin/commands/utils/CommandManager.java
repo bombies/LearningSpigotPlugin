@@ -1,5 +1,6 @@
-package me.bombies.learningplugin.commands;
+package me.bombies.learningplugin.commands.utils;
 
+import me.bombies.learningplugin.LearningPlugin;
 import me.bombies.learningplugin.commands.management.spawn.SetSpawnCommand;
 import me.bombies.learningplugin.commands.management.spawn.SpawnCommand;
 import me.bombies.learningplugin.commands.management.worlds.WorldsCommand;
@@ -10,7 +11,6 @@ import me.bombies.learningplugin.commands.misc.fly.FlyCommand;
 import me.bombies.learningplugin.commands.misc.login.LoginCommand;
 import me.bombies.learningplugin.commands.misc.SuicideCommand;
 import me.bombies.learningplugin.commands.misc.nick.NickCommand;
-import me.bombies.learningplugin.commands.utils.PlayerCommand;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,11 +21,10 @@ public class CommandManager {
 
     private static CommandManager instance;
 
-    private final JavaPlugin plugin;
+    private final JavaPlugin plugin = LearningPlugin.core;
     private final ArrayList<PlayerCommand> commands = new ArrayList<>();
 
-    private CommandManager(JavaPlugin plugin) {
-        this.plugin = plugin;
+    private CommandManager() {
 
         addCommands(
                 new LoginCommand(),
@@ -41,9 +40,9 @@ public class CommandManager {
         );
     }
 
-    public static CommandManager getInstance(JavaPlugin plugin) {
+    public static CommandManager getInstance() {
         if (instance == null)
-            instance = new CommandManager(plugin);
+            instance = new CommandManager();
         return instance;
     }
 
@@ -62,5 +61,12 @@ public class CommandManager {
 
     private void addCommands(PlayerCommand... commands) {
         this.commands.addAll(Arrays.asList(commands));
+    }
+
+    PlayerCommand getCommand(String commandName) {
+        return commands.stream()
+                .filter(command -> command.getCommandName().equalsIgnoreCase(commandName))
+                .findFirst()
+                .orElse(null);
     }
 }
