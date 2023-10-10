@@ -16,11 +16,11 @@ public class SetSpawnCommand extends PlayerCommand {
     }
 
     @Override
-    public void handle(CommandContext commandContext) {
+    public boolean handle(CommandContext commandContext) {
         final Player player = commandContext.getPlayer();
         if (!player.hasPermission(Permissions.SET_SPAWN)) {
             player.sendMessage(DefaultMessage.INSUFFICIENT_PERMS);
-            return;
+            return true;
         }
 
         final Location currentLocation = player.getLocation();
@@ -28,5 +28,6 @@ public class SetSpawnCommand extends PlayerCommand {
         currentLocation.getWorld().setSpawnLocation(currentLocation);
 
         player.sendMessage(MessageUtils.color("&aYou have successfully set the spawn location!"));
+        return true;
     }
 }

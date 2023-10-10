@@ -10,4 +10,7 @@ public class Permissions {
     public final static String NICK_OTHERS = NODE_PREFIX + "nick.others";
 
     public final static String SET_SPAWN = NODE_PREFIX + "spawn.set";
+
+    public final static String VIEW_WORLDS = NODE_PREFIX + "worlds.view";
+    public final static String CREATE_WORLDS = NODE_PREFIX + "worlds.create";
 }

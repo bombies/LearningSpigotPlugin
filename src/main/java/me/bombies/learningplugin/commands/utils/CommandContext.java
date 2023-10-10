@@ -11,7 +11,7 @@ public class CommandContext {
     private final String label;
     private final List<String> args;
 
-    protected CommandContext(Player player, Command command, String label, List<String> args) {
+    CommandContext(Player player, Command command, String label, List<String> args) {
         this.player = player;
         this.command = command;
         this.label = label;

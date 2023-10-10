@@ -2,6 +2,7 @@ package me.bombies.learningplugin.commands;
 
 import me.bombies.learningplugin.commands.management.spawn.SetSpawnCommand;
 import me.bombies.learningplugin.commands.management.spawn.SpawnCommand;
+import me.bombies.learningplugin.commands.management.worlds.WorldsCommand;
 import me.bombies.learningplugin.commands.misc.WorkBenchCommand;
 import me.bombies.learningplugin.commands.misc.fly.FlyCommand;
 import me.bombies.learningplugin.commands.misc.login.LoginCommand;
@@ -31,7 +32,8 @@ public class CommandManager {
                 new WorkBenchCommand(),
                 new NickCommand(),
                 new SetSpawnCommand(),
-                new SpawnCommand()
+                new SpawnCommand(),
+                new WorldsCommand()
         );
     }
 

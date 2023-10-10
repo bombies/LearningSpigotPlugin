@@ -11,8 +11,9 @@ public class WorkBenchCommand extends PlayerCommand {
     }
 
     @Override
-    public void handle(CommandContext commandContext) {
+    public boolean handle(CommandContext commandContext) {
         final Player player = commandContext.getPlayer();
         player.openWorkbench(null, true);
+        return true;
     }
 }

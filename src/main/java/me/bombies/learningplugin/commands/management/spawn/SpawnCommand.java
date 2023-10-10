@@ -14,12 +14,13 @@ public class SpawnCommand extends PlayerCommand {
     }
 
     @Override
-    public void handle(CommandContext commandContext) {
+    public boolean handle(CommandContext commandContext) {
         final Player player = commandContext.getPlayer();
         final Location spawnLocation = Config.spawnLocation.getSpawnLocation();
         if (spawnLocation != null)
             player.teleport(spawnLocation);
         else player.teleport(player.getWorld().getSpawnLocation());
         player.sendMessage(MessageUtils.color("&aTeleported to spawn!"));
+        return true;
     }
 }

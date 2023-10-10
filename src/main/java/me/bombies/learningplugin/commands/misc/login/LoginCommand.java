@@ -12,13 +12,14 @@ public class LoginCommand extends PlayerCommand {
     }
 
     @Override
-    public void handle(CommandContext args) {
+    public boolean handle(CommandContext args) {
         final Player player = args.getPlayer();
         if (LoginService.playerIsLoggedIn(player)) {
             player.sendMessage(MessageUtils.color("&4&lHold on! &cYou are already logged in!"));
-            return;
+            return true;
         }
         LoginService.login(player);
         player.sendMessage(MessageUtils.color("&aYou have logged in!"));
+        return true;
     }
 }

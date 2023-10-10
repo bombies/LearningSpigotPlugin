@@ -11,9 +11,10 @@ public class SuicideCommand extends PlayerCommand {
     }
 
     @Override
-    public void handle(CommandContext args) {
+    public boolean handle(CommandContext args) {
         final Player player = args.getPlayer();
         player.setHealth(0D);
         player.sendMessage(MessageUtils.color("&bYou've committed suicide..."));
+        return true;
     }
 }

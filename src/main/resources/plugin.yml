@@ -32,6 +32,9 @@ commands:
   spawn:
     description: Teleport to the server spawn
     usage: /<command>
+  worlds:
+    description: View and manage server worlds
+    usage: /<command> [options]
 permissions:
   learningplugin.*:
     description: Gives a user access to every permission
@@ -62,3 +65,12 @@ permissions:
   learningplugin.spawn:
     default: true
     description: Allows a user to teleport to the server spawn
+  learningplugin.worlds.*:
+    description: Gives a user access to all world permissions
+    children:
+      learningplugin.worlds.view: true
+      learningplugin.worlds.create: true
+  learningplugin.worlds.view:
+    description: Allows a user to view the server worlds
+  learningplugin.worlds.create:
+    description: Allows a user to create a new world

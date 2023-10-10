@@ -17,30 +17,32 @@ public class FlyCommand extends PlayerCommand {
     }
 
     @Override
-    public void handle(CommandContext context) {
+    public boolean handle(CommandContext context) {
         final Player player = context.getPlayer();
         final CommandArgs args = context.getArgs();
 
         if (args.isEmpty()) {
             if (!player.hasPermission(Permissions.FLY)) {
                 player.sendMessage(DefaultMessage.INSUFFICIENT_PERMS);
-                return;
+                return true;
             }
 
             FlyService.toggleFly(player, true);
         } else {
             if (!player.hasPermission(Permissions.FLY_OTHERS)) {
                 player.sendMessage(DefaultMessage.INSUFFICIENT_PERMS);
-                return;
+                return true;
             }
 
             final Player target = Bukkit.getPlayerExact(args.first());
             if (target == null) {
                 player.sendMessage(MessageUtils.color("&c There was no player found with the name" + args.first()));
-                return;
+                return true;
             }
 
             FlyService.toggleFly(target, target.getUniqueId() == player.getUniqueId());
         }
+
+        return true;
     }
 }

@@ -16,21 +16,21 @@ public class NickCommand extends PlayerCommand {
     }
 
     @Override
-    public void handle(CommandContext commandContext) {
+    public boolean handle(CommandContext commandContext) {
         final Player player = commandContext.getPlayer();
         final CommandArgs args = commandContext.getArgs();
 
         if (args.isEmpty()) {
             if (!player.hasPermission(Permissions.NICK)) {
                 player.sendMessage(DefaultMessage.INSUFFICIENT_PERMS);
-                return;
+                return true;
             }
 
             player.sendMessage(DefaultMessage.USAGE("nick " + (player.hasPermission(Permissions.NICK_OTHERS) ? "[target] " : "") + "<nickname>"));
         } else if (args.length() == 1) {
             if (!player.hasPermission(Permissions.NICK)) {
                 player.sendMessage(DefaultMessage.INSUFFICIENT_PERMS);
-                return;
+                return true;
             }
 
             if (args.first().equalsIgnoreCase("clear"))
@@ -39,11 +39,13 @@ public class NickCommand extends PlayerCommand {
         } else {
             if (!player.hasPermission(Permissions.NICK_OTHERS)) {
                 player.sendMessage(DefaultMessage.INSUFFICIENT_PERMS);
-                return;
+                return true;
             }
 
             handleOthersNick(player, args.first(), args.get(1));
         }
+
+        return true;
     }
 
     private void handleSelfNickName(Player player, String newNickName) {

@@ -27,11 +27,11 @@ public class CommandArgs {
     }
 
     public String first() {
-        return args.get(0);
+        return isEmpty() ? null : args.get(0);
     }
 
     public String last() {
-        return args.get(args.size() - 1);
+        return isEmpty() ? null : args.get(args.size() - 1);
     }
 
     public int length() {
@@ -40,5 +40,9 @@ public class CommandArgs {
 
     public boolean isEmpty() {
         return args.isEmpty();
+    }
+
+    public List<String> all() {
+        return this.args;
     }
 }
