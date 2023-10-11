@@ -45,6 +45,10 @@ public class MenuItem {
         return name;
     }
 
+    public String getCustomId() {
+        return customId;
+    }
+
     public List<String> getLore() {
         return lore;
     }

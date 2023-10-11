@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.function.Function;
 
 public class MenuBuilder {
-    private Player owner;
     private String title;
     private MenuSize size;
     private boolean withPlaceHolders;
@@ -19,11 +18,6 @@ public class MenuBuilder {
 
     public static MenuBuilder start() {
         return new MenuBuilder();
-    }
-
-    public MenuBuilder owner(Player owner) {
-        this.owner = owner;
-        return this;
     }
 
     public MenuBuilder title(String title) {
@@ -54,13 +48,11 @@ public class MenuBuilder {
     }
 
     public Menu build() {
-        if (owner == null)
-            throw new IllegalStateException("Menu owner must be set.");
         if (title == null)
             throw new IllegalStateException("Menu title must be set.");
         if (size == null)
             throw new IllegalStateException("Menu size must be set.");
-        return new Menu(owner, title, size, withPlaceHolders, placeHolderMaterial, items);
+        return new Menu(title, size, withPlaceHolders, placeHolderMaterial, items);
     }
 
 }

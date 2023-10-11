@@ -2,7 +2,6 @@ package me.bombies.learningplugin.utils.menus;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import javax.annotation.Nullable;
@@ -11,7 +10,6 @@ import java.util.stream.IntStream;
 
 public class Menu {
 
-    private final Player owner;
     private final String title;
     private final MenuSize size;
     private final boolean withPlaceHolders;
@@ -19,17 +17,12 @@ public class Menu {
 
     private final List<MenuItem> items;
 
-    Menu(Player owner, String title, MenuSize size, boolean withPlaceHolders, @Nullable Material placeHolderMaterial, List<MenuItem> items) {
-        this.owner = owner;
+    Menu(String title, MenuSize size, boolean withPlaceHolders, @Nullable Material placeHolderMaterial, List<MenuItem> items) {
         this.title = title;
         this.size = size;
         this.withPlaceHolders = withPlaceHolders;
         this.placeHolderMaterial = placeHolderMaterial;
         this.items = items;
-    }
-
-    public Player getOwner() {
-        return owner;
     }
 
     public String getTitle() {
@@ -45,7 +38,7 @@ public class Menu {
     }
 
     public Inventory toInventory() {
-        final var menuInventory = Bukkit.createInventory(owner, size.getSize(), title);
+        final var menuInventory = Bukkit.createInventory(null, size.getSize(), title);
 
         for (final var item : items) {
             final var slot = item.getSlot();

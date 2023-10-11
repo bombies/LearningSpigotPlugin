@@ -2,7 +2,7 @@ package me.bombies.learningplugin.events;
 
 import me.bombies.learningplugin.LearningPlugin;
 import me.bombies.learningplugin.commands.management.spawn.events.RespawnTeleportEventListener;
-import me.bombies.learningplugin.commands.menu.MenuEventListener;
+import me.bombies.learningplugin.commands.menu.CustomMenu;
 import me.bombies.learningplugin.commands.misc.invsee.InventorySeeMoveEventListener;
 import me.bombies.learningplugin.commands.teleportbow.TeleportBowEventListener;
 import me.bombies.learningplugin.events.customchat.CustomChatEventListener;
@@ -35,7 +35,6 @@ public class EventManager {
                 new CustomChatEventListener(),
                 new RespawnTeleportEventListener(),
                 new RainEventListener(),
-                new MenuEventListener(),
                 new InventorySeeMoveEventListener(),
                 new TeleportBowEventListener()
         );
