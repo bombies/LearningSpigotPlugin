@@ -4,6 +4,7 @@ import me.bombies.learningplugin.LearningPlugin;
 import me.bombies.learningplugin.commands.management.spawn.events.RespawnTeleportEventListener;
 import me.bombies.learningplugin.commands.menu.MenuEventListener;
 import me.bombies.learningplugin.commands.misc.invsee.InventorySeeMoveEventListener;
+import me.bombies.learningplugin.commands.teleportbow.TeleportBowEventListener;
 import me.bombies.learningplugin.events.customchat.CustomChatEventListener;
 import me.bombies.learningplugin.events.weather.RainEventListener;
 import me.bombies.learningplugin.events.welcomer.PlayerWelcomeEventListener;
@@ -35,7 +36,8 @@ public class EventManager {
                 new RespawnTeleportEventListener(),
                 new RainEventListener(),
                 new MenuEventListener(),
-                new InventorySeeMoveEventListener()
+                new InventorySeeMoveEventListener(),
+                new TeleportBowEventListener()
         );
     }
 

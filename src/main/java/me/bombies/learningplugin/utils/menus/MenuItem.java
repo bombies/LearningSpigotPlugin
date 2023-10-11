@@ -1,13 +1,11 @@
 package me.bombies.learningplugin.utils.menus;
 
 import me.bombies.learningplugin.LearningPlugin;
-import me.bombies.learningplugin.utils.builders.ItemBuilder;
+import me.bombies.learningplugin.utils.items.builders.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -71,15 +69,14 @@ public class MenuItem {
                 .lore(lore);
 
         if (isEnchanted) {
-            itemBuilder.enchant(Enchantment.CHANNELING, 1);
-            itemBuilder.itemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+            itemBuilder.enchant(Enchantment.CHANNELING, 1)
+                    .hideUnbreakable()
+                    .hideAttributes()
+                    .hideEnchants();
         }
 
-        if (customId != null) {
-            itemBuilder.customIdKey(MENU_ITEM_KEY)
-                    .customId(customId);
-        }
-
+        if (customId != null)
+            itemBuilder.customId(MENU_ITEM_KEY, customId);
         return itemBuilder.build();
     }
 }

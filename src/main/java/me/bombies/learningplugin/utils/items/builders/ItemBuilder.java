@@ -1,4 +1,4 @@
-package me.bombies.learningplugin.utils.builders;
+package me.bombies.learningplugin.utils.items.builders;
 
 import me.bombies.learningplugin.LearningPlugin;
 import me.bombies.learningplugin.utils.classes.Pair;
@@ -13,17 +13,19 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.*;
 
 public class ItemBuilder {
+    public static final NamespacedKey CUSTOM_ITEM_KEY = new NamespacedKey(LearningPlugin.core, "custom-item-id");
+
     private Material material;
-    private NamespacedKey customIdKey;
+    private NamespacedKey customIdKey = CUSTOM_ITEM_KEY;
     private String customId;
 
     private String name;
     private List<String> lore;
     private int amount = 1;
-    private HashMap<Enchantment, Integer> enchants;
-    private HashSet<ItemFlag> itemFlags;
-    private boolean isUnbreakable;
-    private HashMap<String, String> metaData;
+    private HashMap<Enchantment, Integer> enchants = new HashMap<>();
+    private HashSet<ItemFlag> itemFlags = new HashSet<>();
+    private boolean isUnbreakable = false;
+    private HashMap<String, String> metaData = new HashMap<>();
 
     public static ItemBuilder start() {
         return new ItemBuilder();
@@ -39,18 +41,20 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder customIdKey(String customIdKey) {
+    public ItemBuilder customId(String customIdKey, String customId) {
         this.customIdKey = new NamespacedKey(LearningPlugin.core, customIdKey);
+        this.customId = customId;
         return this;
     }
 
-    public ItemBuilder customIdKey(NamespacedKey customIdKey) {
+    public ItemBuilder customId(NamespacedKey customIdKey, String customId) {
         this.customIdKey = customIdKey;
+        this.customId = customId;
         return this;
     }
 
     public ItemBuilder name(String name) {
-        this.name = name;
+        this.name = MessageUtils.color(name);
         return this;
     }
 
@@ -60,7 +64,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder lore(List<String> lore) {
-        this.lore = lore;
+        this.lore = lore.stream().map(MessageUtils::color).toList();
         return this;
     }
 
@@ -87,8 +91,23 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder unbreakable(boolean isUnbreakable) {
-        this.isUnbreakable = isUnbreakable;
+    public ItemBuilder hideEnchants() {
+        itemFlags.add(ItemFlag.HIDE_ENCHANTS);
+        return this;
+    }
+
+    public ItemBuilder hideAttributes() {
+        itemFlags.add(ItemFlag.HIDE_ATTRIBUTES);
+        return this;
+    }
+
+    public ItemBuilder hideUnbreakable() {
+        itemFlags.add(ItemFlag.HIDE_UNBREAKABLE);
+        return this;
+    }
+
+    public ItemBuilder unbreakable() {
+        this.isUnbreakable = true;
         return this;
     }
 

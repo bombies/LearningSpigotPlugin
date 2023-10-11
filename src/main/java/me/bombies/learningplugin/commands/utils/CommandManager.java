@@ -11,6 +11,7 @@ import me.bombies.learningplugin.commands.misc.fly.FlyCommand;
 import me.bombies.learningplugin.commands.misc.login.LoginCommand;
 import me.bombies.learningplugin.commands.misc.SuicideCommand;
 import me.bombies.learningplugin.commands.misc.nick.NickCommand;
+import me.bombies.learningplugin.commands.teleportbow.TeleportBowCommand;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -36,7 +37,8 @@ public class CommandManager {
                 new SpawnCommand(),
                 new WorldsCommand(),
                 new MenuCommand(),
-                new InventorySeeCommand()
+                new InventorySeeCommand(),
+                new TeleportBowCommand()
         );
     }
 
