@@ -63,13 +63,13 @@ public class TeleportBowCommand extends PlayerCommand {
                 .material(Material.BOW)
                 .name("&b&lTeleport Bow")
                 .lore("&7Shoot to teleport to where the arrow lands")
-                .customId(TeleportBowMetaData.ID)
+                .customId(TeleportBowMetaDataKey.ID)
                 .unbreakable()
                 .enchant(Enchantment.ARROW_DAMAGE, 1)
                 .hideUnbreakable()
                 .hideEnchants()
                 .hideAttributes()
-                .metaData(TeleportBowMetaData.OWNER, player.getUniqueId().toString())
+                .metaData(TeleportBowMetaDataKey.OWNER, player.getUniqueId().toString())
                 .build();
     }
 }

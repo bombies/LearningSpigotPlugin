@@ -66,10 +66,10 @@ public class TeleportBowEventListener implements Listener {
         final var itemPersistentData = new PersistentDataHandler(mainHandItemMeta);
         final var customId = itemPersistentData.getString(ItemBuilder.CUSTOM_ITEM_KEY);
 
-        if (customId == null || !customId.equals(TeleportBowMetaData.ID))
+        if (customId == null || !customId.equals(TeleportBowMetaDataKey.ID))
             return;
 
-        final var owner = itemPersistentData.getString(TeleportBowMetaData.OWNER);
+        final var owner = itemPersistentData.getString(TeleportBowMetaDataKey.OWNER);
         if (owner == null || !owner.equals(player.getUniqueId().toString()))
             return;
 

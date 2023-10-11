@@ -45,6 +45,9 @@ commands:
     description: Gives a user a teleport bow
     usage: /<command> [players]
     aliases: [ tpbow ]
+  godhorse:
+    description: Spawn a God Horse.
+    aliases: [ ghorse, gh ]
 permissions:
   learningplugin.*:
     description: Gives a user access to every permission
@@ -98,3 +101,5 @@ permissions:
     description: Allows a user to get a teleport bow
   learningplugin.teleportbow.others:
     description: Allows a user to give another user a teleport bow
+  learningplugin.godhorse:
+    description: Allows a user to spawn a God Horse

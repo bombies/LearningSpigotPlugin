@@ -1,6 +1,7 @@
 package me.bombies.learningplugin.commands.utils;
 
 import me.bombies.learningplugin.LearningPlugin;
+import me.bombies.learningplugin.commands.GodHorseCommand;
 import me.bombies.learningplugin.commands.management.spawn.SetSpawnCommand;
 import me.bombies.learningplugin.commands.management.spawn.SpawnCommand;
 import me.bombies.learningplugin.commands.management.worlds.WorldsCommand;
@@ -38,7 +39,8 @@ public class CommandManager {
                 new WorldsCommand(),
                 new MenuCommand(),
                 new InventorySeeCommand(),
-                new TeleportBowCommand()
+                new TeleportBowCommand(),
+                new GodHorseCommand()
         );
     }
 

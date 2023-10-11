@@ -19,4 +19,6 @@ public class Permissions {
 
     public final static String TELEPORT_BOW = NODE_PREFIX + "teleportbow";
     public final static String TELEPORT_BOW_OTHERS = NODE_PREFIX + "teleportbow.others";
+
+    public final static String GOD_HORSE = NODE_PREFIX + "godhorse";
 }
