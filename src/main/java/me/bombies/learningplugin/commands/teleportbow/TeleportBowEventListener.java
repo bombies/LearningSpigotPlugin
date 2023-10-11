@@ -1,20 +1,17 @@
 package me.bombies.learningplugin.commands.teleportbow;
 
-import me.bombies.learningplugin.LearningPlugin;
+import me.bombies.learningplugin.utils.PersistentDataHandler;
 import me.bombies.learningplugin.utils.items.builders.ItemBuilder;
 import org.bukkit.Location;
-import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.persistence.PersistentDataType;
 
 public class TeleportBowEventListener implements Listener {
-    private final static NamespacedKey TELEPORT_ARROW_KEY = new NamespacedKey(LearningPlugin.core, "teleport_arrow");
+    private final static String TELEPORT_ARROW_KEY = "teleport_arrow";
 
     @EventHandler
     public void onArrowLand(ProjectileHitEvent event) {
@@ -23,8 +20,8 @@ public class TeleportBowEventListener implements Listener {
         if (entity.getType() != EntityType.ARROW || !(shooter instanceof Player p))
             return;
 
-        final var entityPersistentDataContainer = entity.getPersistentDataContainer();
-        if (!entityPersistentDataContainer.has(TELEPORT_ARROW_KEY, PersistentDataType.STRING))
+        final var entityPersistentData = new PersistentDataHandler(entity);
+        if (!entityPersistentData.has(TELEPORT_ARROW_KEY))
             return;
 
         final var hitEntity = event.getHitEntity();
@@ -66,17 +63,17 @@ public class TeleportBowEventListener implements Listener {
         if (mainHandItemMeta == null)
             return;
 
-        final var mainHandItemDataContainer = mainHandItemMeta.getPersistentDataContainer();
-        final var customId = mainHandItemDataContainer.get(ItemBuilder.CUSTOM_ITEM_KEY, PersistentDataType.STRING);
+        final var itemPersistentData = new PersistentDataHandler(mainHandItemMeta);
+        final var customId = itemPersistentData.getString(ItemBuilder.CUSTOM_ITEM_KEY);
 
         if (customId == null || !customId.equals(TeleportBowMetaData.ID))
             return;
 
-        final var owner = mainHandItemDataContainer.get(new NamespacedKey(LearningPlugin.core, TeleportBowMetaData.OWNER), PersistentDataType.STRING);
+        final var owner = itemPersistentData.getString(TeleportBowMetaData.OWNER);
         if (owner == null || !owner.equals(player.getUniqueId().toString()))
             return;
 
-        final var entityPersistentDataContainer = entity.getPersistentDataContainer();
-        entityPersistentDataContainer.set(TELEPORT_ARROW_KEY, PersistentDataType.STRING, player.getUniqueId().toString());
+        final var entityPersistentData = new PersistentDataHandler(entity);
+        entityPersistentData.set(TELEPORT_ARROW_KEY, player.getUniqueId().toString());
     }
 }
