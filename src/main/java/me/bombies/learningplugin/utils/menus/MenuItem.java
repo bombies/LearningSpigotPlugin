@@ -65,8 +65,10 @@ public class MenuItem {
         final var itemBuilder = ItemBuilder.start()
                 .material(material)
                 .amount(amount)
-                .name(name)
-                .lore(lore);
+                .name(name);
+
+        if (lore != null)
+            itemBuilder.lore(lore);
 
         if (isEnchanted) {
             itemBuilder.enchant(Enchantment.CHANNELING, 1)
