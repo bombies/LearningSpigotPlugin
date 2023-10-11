@@ -1,5 +1,8 @@
 package me.bombies.learningplugin.utils.classes;
 
+import org.bukkit.Location;
+import org.bukkit.World;
+
 import javax.annotation.Nullable;
 
 public class Coordinates {
@@ -22,6 +25,10 @@ public class Coordinates {
         this(x, y, z, yaw, null);
     }
 
+    public Coordinates(Location location) {
+        this(location.getX(), location.getY(), location.getZ(), (double) location.getYaw(), (double) location.getPitch());
+    }
+
     public double getX() {
         return coordinates.getLeft();
     }
@@ -40,5 +47,9 @@ public class Coordinates {
 
     public double getPitch() {
         return pitch;
+    }
+
+    public Location toLocation(@Nullable World world) {
+        return new Location(world, getX(), getY(), getZ(), (float) getYaw(), (float) getPitch());
     }
 }

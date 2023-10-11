@@ -35,4 +35,6 @@ public class Permissions {
     public final static String CHAT_COLOR_PURPLE = NODE_PREFIX + "chatcolor.purple";
     public final static String CHAT_COLOR_DARK_PURPLE = NODE_PREFIX + "chatcolor.darkpurple";
     public final static String CHAT_COLOR_BLACK = NODE_PREFIX + "chatcolor.black";
+
+    public static final String HOLOGRAMS = NODE_PREFIX + "holograms";
 }

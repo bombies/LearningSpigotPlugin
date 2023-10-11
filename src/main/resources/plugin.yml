@@ -51,6 +51,9 @@ commands:
   chatcolor:
     description: Changes the chat color of the player
     aliases: [ color, colour, chatcolour ]
+  holograms:
+    description: View and manage holograms
+    aliases: [ hologram, holo ]
 permissions:
   learningplugin.*:
     description: Gives a user access to every permission
@@ -132,3 +135,5 @@ permissions:
     description: Allows a user to change their chat color to dark purple
   learningplugin.chatcolor.black:
     description: Allows a user to change their chat color to black
+  learningplugin.holograms:
+    description: Allows a user to view and manage holograms

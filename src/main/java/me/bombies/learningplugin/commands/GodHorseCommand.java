@@ -43,8 +43,8 @@ public class GodHorseCommand extends PlayerCommand {
         godHorse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
         godHorse.setCustomName(MessageUtils.color("&f&l[&e&l&k@@&f&l]&r &6&lGOD HORSE &f&l[&e&l&k@@&f&l]"));
         godHorse.setCustomNameVisible(true);
-        godHorse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(2);
-        godHorse.getAttribute(Attribute.HORSE_JUMP_STRENGTH).setBaseValue(3);
+        godHorse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
+        godHorse.setJumpStrength(2);
 
         final var godHorseData = new PersistentDataHandler(godHorse);
         godHorseData.set("owner", player.getUniqueId().toString());
