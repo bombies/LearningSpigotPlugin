@@ -48,13 +48,16 @@ public class PersistentDataHandler {
     }
 
     public Double getDouble(String key) {
+        final var value = persistentDataHolder.getPersistentDataContainer()
+                .get(new NamespacedKey(LearningPlugin.core, key), PersistentDataType.DOUBLE);
         return persistentDataHolder.getPersistentDataContainer()
                 .get(new NamespacedKey(LearningPlugin.core, key), PersistentDataType.DOUBLE);
     }
 
-    public Boolean getBoolean(String key) {
-        return persistentDataHolder.getPersistentDataContainer()
+    public boolean getBoolean(String key) {
+        final var value = persistentDataHolder.getPersistentDataContainer()
                 .get(new NamespacedKey(LearningPlugin.core, key), PersistentDataType.BOOLEAN);
+        return value != null && value;
     }
 
     public boolean has(String key) {

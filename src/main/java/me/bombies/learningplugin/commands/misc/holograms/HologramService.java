@@ -68,6 +68,17 @@ public class HologramService {
         armorStand.setRemoveWhenFarAway(false);
     }
 
+    public static void createWorldHologram(@Nonnull World world, @Nonnull Location location, @Nonnull String name, List<String> lines) {
+        for (int i = 0; i < lines.size(); i++) {
+            createWorldHologram(
+                    world,
+                    location.add(0, (-0.30) * i, 0),
+                    name,
+                    MessageUtils.color(lines.get(i))
+            );
+        }
+    }
+
     public static void createWorldHologram(@Nonnull Player player, @Nonnull String name, @Nullable String text) {
         createWorldHologram(player.getWorld(), player.getLocation(), name, text);
     }
