@@ -1,6 +1,7 @@
 package me.bombies.learningplugin.utils.menus;
 
 import me.bombies.learningplugin.LearningPlugin;
+import me.bombies.learningplugin.utils.builders.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -63,22 +64,22 @@ public class MenuItem {
     }
 
     public ItemStack toItemStack() {
-        final var item = new ItemStack(material, amount);
-        final var itemMeta = item.getItemMeta();
-        assert itemMeta != null;
-
-        itemMeta.setDisplayName(name);
-        itemMeta.setLore(lore);
+        final var itemBuilder = ItemBuilder.start()
+                .material(material)
+                .amount(amount)
+                .name(name)
+                .lore(lore);
 
         if (isEnchanted) {
-            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-            itemMeta.addEnchant(Enchantment.CHANNELING, 1, true);
+            itemBuilder.enchant(Enchantment.CHANNELING, 1);
+            itemBuilder.itemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         }
 
-        if (customId != null)
-            itemMeta.getPersistentDataContainer().set(MENU_ITEM_KEY, PersistentDataType.STRING, customId);
+        if (customId != null) {
+            itemBuilder.customIdKey(MENU_ITEM_KEY)
+                    .customId(customId);
+        }
 
-        item.setItemMeta(itemMeta);
-        return item;
+        return itemBuilder.build();
     }
 }

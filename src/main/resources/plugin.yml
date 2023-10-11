@@ -41,6 +41,10 @@ commands:
   invsee:
     description: View another player's inventory.
     usage: /<command> player
+  teleportbow:
+    description: Gives a user a teleport bow
+    usage: /<command> [players]
+    aliases: [ tpbow ]
 permissions:
   learningplugin.*:
     description: Gives a user access to every permission
@@ -90,3 +94,7 @@ permissions:
     description: Allows a user to view another player's inventory
   learningplugin.invsee.move:
     description: Allows a user to move items in another player's inventory
+  learningplugin.teleportbow:
+    description: Allows a user to get a teleport bow
+  learningplugin.teleportbow.others:
+    description: Allows a user to give another user a teleport bow

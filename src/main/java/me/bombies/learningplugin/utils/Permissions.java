@@ -16,4 +16,7 @@ public class Permissions {
 
     public final static String INV_SEE = NODE_PREFIX + "invsee";
     public final static String INV_SEE_MOVE = NODE_PREFIX + "invsee.move";
+
+    public final static String TELEPORT_BOW = NODE_PREFIX + "teleportbow";
+    public final static String TELEPORT_BOW_OTHERS = NODE_PREFIX + "teleportbow.others";
 }
