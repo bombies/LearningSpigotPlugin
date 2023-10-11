@@ -72,5 +72,5 @@ public abstract class AbstractMenu implements Listener {
         e.setCancelled(true);
     }
 
-    protected abstract void onItemClick(MenuItem item, Player player);
+    protected void onItemClick(MenuItem item, Player player) {}
 }

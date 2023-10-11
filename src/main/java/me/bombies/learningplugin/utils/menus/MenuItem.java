@@ -69,17 +69,16 @@ public class MenuItem {
         final var itemBuilder = ItemBuilder.start()
                 .material(material)
                 .amount(amount)
-                .name(name);
+                .name(name)
+                .hideUnbreakable()
+                .hideAttributes()
+                .hideEnchants();
 
         if (lore != null)
             itemBuilder.lore(lore);
 
-        if (isEnchanted) {
-            itemBuilder.enchant(Enchantment.CHANNELING, 1)
-                    .hideUnbreakable()
-                    .hideAttributes()
-                    .hideEnchants();
-        }
+        if (isEnchanted)
+            itemBuilder.enchant(Enchantment.CHANNELING, 1);
 
         if (customId != null)
             itemBuilder.customId(MENU_ITEM_KEY, customId);

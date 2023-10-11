@@ -6,6 +6,7 @@ import me.bombies.learningplugin.commands.management.spawn.SetSpawnCommand;
 import me.bombies.learningplugin.commands.management.spawn.SpawnCommand;
 import me.bombies.learningplugin.commands.management.worlds.WorldsCommand;
 import me.bombies.learningplugin.commands.menu.MenuCommand;
+import me.bombies.learningplugin.commands.misc.chatcolor.ChatColorCommand;
 import me.bombies.learningplugin.commands.misc.invsee.InventorySeeCommand;
 import me.bombies.learningplugin.commands.misc.WorkBenchCommand;
 import me.bombies.learningplugin.commands.misc.fly.FlyCommand;
@@ -40,7 +41,8 @@ public class CommandManager {
                 new MenuCommand(),
                 new InventorySeeCommand(),
                 new TeleportBowCommand(),
-                new GodHorseCommand()
+                new GodHorseCommand(),
+                new ChatColorCommand()
         );
     }
 

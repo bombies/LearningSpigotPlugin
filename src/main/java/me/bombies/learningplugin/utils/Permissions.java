@@ -21,4 +21,18 @@ public class Permissions {
     public final static String TELEPORT_BOW_OTHERS = NODE_PREFIX + "teleportbow.others";
 
     public final static String GOD_HORSE = NODE_PREFIX + "godhorse";
+
+    public final static String CHAT_COLOR_DARK_RED = NODE_PREFIX + "chatcolor.darkred";
+    public final static String CHAT_COLOR_RED = NODE_PREFIX + "chatcolor.darkred";
+    public final static String CHAT_COLOR_GOLD = NODE_PREFIX + "chatcolor.gold";
+    public final static String CHAT_COLOR_GREEN = NODE_PREFIX + "chatcolor.green";
+    public final static String CHAT_COLOR_YELLOW = NODE_PREFIX + "chatcolor.yellow";
+    public final static String CHAT_COLOR_DARK_GREEN = NODE_PREFIX + "chatcolor.darkgreen";
+    public final static String CHAT_COLOR_AQUA = NODE_PREFIX + "chatcolor.aqua";
+    public final static String CHAT_COLOR_DARK_AQUA = NODE_PREFIX + "chatcolor.darkaqua";
+    public final static String CHAT_COLOR_DARK_BLUE = NODE_PREFIX + "chatcolor.darkblue";
+    public final static String CHAT_COLOR_BLUE = NODE_PREFIX + "chatcolor.blue";
+    public final static String CHAT_COLOR_PURPLE = NODE_PREFIX + "chatcolor.purple";
+    public final static String CHAT_COLOR_DARK_PURPLE = NODE_PREFIX + "chatcolor.darkpurple";
+    public final static String CHAT_COLOR_BLACK = NODE_PREFIX + "chatcolor.black";
 }

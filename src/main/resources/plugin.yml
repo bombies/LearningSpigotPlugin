@@ -48,6 +48,9 @@ commands:
   godhorse:
     description: Spawn a God Horse.
     aliases: [ ghorse, gh ]
+  chatcolor:
+    description: Changes the chat color of the player
+    aliases: [ color, colour, chatcolour ]
 permissions:
   learningplugin.*:
     description: Gives a user access to every permission
@@ -103,3 +106,29 @@ permissions:
     description: Allows a user to give another user a teleport bow
   learningplugin.godhorse:
     description: Allows a user to spawn a God Horse
+  learningplugin.chatcolor.red:
+    description: Allows a user to change their chat color to red
+  learningplugin.chatcolor.darkred:
+    description: Allows a user to change their chat color to dark red
+  learningplugin.chatcolor.gold:
+    description: Allows a user to change their chat color to gold
+  learningplugin.chatcolor.yellow:
+    description: Allows a user to change their chat color to yellow
+  learningplugin.chatcolor.green:
+    description: Allows a user to change their chat color to green
+  learningplugin.chatcolor.darkgreen:
+    description: Allows a user to change their chat color to dark green
+  learningplugin.chatcolor.aqua:
+    description: Allows a user to change their chat color to aqua
+  learningplugin.chatcolor.darkaqua:
+    description: Allows a user to change their chat color to dark aqua
+  learningplugin.chatcolor.blue:
+    description: Allows a user to change their chat color to blue
+  learningplugin.chatcolor.darkblue:
+    description: Allows a user to change their chat color to dark blue
+  learningplugin.chatcolor.purple:
+    description: Allows a user to change their chat color to purple
+  learningplugin.chatcolor.darkpurple:
+    description: Allows a user to change their chat color to dark purple
+  learningplugin.chatcolor.black:
+    description: Allows a user to change their chat color to black
