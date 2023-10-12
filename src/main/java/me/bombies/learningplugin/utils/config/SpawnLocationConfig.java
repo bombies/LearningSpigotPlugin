@@ -4,17 +4,19 @@ import me.bombies.learningplugin.utils.classes.Coordinates;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
 
 public class SpawnLocationConfig extends AbstractConfig {
 
     private static SpawnLocationConfig instance = null;
 
-    private SpawnLocationConfig() {
+    private SpawnLocationConfig(FileConfiguration config) {
+        super(config);
     }
 
-    static SpawnLocationConfig getInstance() {
+    static SpawnLocationConfig getInstance(FileConfiguration config) {
         if (instance == null)
-            instance = new SpawnLocationConfig();
+            instance = new SpawnLocationConfig(config);
         return instance;
     }
 

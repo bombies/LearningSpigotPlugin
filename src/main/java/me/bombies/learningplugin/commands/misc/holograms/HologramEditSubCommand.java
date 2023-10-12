@@ -38,7 +38,7 @@ public class HologramEditSubCommand extends PlayerSubCommand {
         }
 
         switch (subCommand.toLowerCase()) {
-            case "addline" -> {
+            case "addline", "add", "al" -> {
                 if (args.length() <= 3) {
                     player.sendMessage(MessageUtils.color("&cYou must provide a line of text to add to the hologram!"));
                     return;
@@ -47,10 +47,10 @@ public class HologramEditSubCommand extends PlayerSubCommand {
                 final var line = String.join(" ", args.all().subList(2, args.length()));
                 handleLineAdd(player, hologram, line);
             }
-            case "editline" -> {
+            case "editline", "el", "edit" -> {
 
             }
-            case "removeline" -> {
+            case "removeline", "remove", "delete", "rl", "dl" -> {
 
             }
             default -> player.sendMessage(usages);
@@ -58,8 +58,8 @@ public class HologramEditSubCommand extends PlayerSubCommand {
     }
 
     private void handleLineAdd(Player player, Hologram hologram, String line) {
-        final var armorStand = HologramService.findWorldHologram(hologram);
-        if (armorStand == null) {
+        final var armorStands = HologramService.findWorldHologram(hologram);
+        if (armorStands.isEmpty()) {
             HologramService.removeHologram(hologram.getName());
             return;
         }
@@ -73,6 +73,7 @@ public class HologramEditSubCommand extends PlayerSubCommand {
         );
 
         hologram.addLine(line);
+        HologramService.updateHologram(hologram);
         player.sendMessage(MessageUtils.color("&aSuccessfully added that line!"));
     }
 }

@@ -1,14 +1,21 @@
 package me.bombies.learningplugin.utils.classes;
 
+import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.util.NumberConversions;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Coordinates {
+public class Coordinates implements ConfigurationSerializable {
 
     private final Triple<Double, Double, Double> coordinates;
+    @Getter
     private final double yaw;
+    @Getter
     private final double pitch;
 
     public Coordinates(double x, double y, double z, @Nullable Double yaw, @Nullable Double pitch) {
@@ -41,15 +48,29 @@ public class Coordinates {
         return coordinates.getRight();
     }
 
-    public double getYaw() {
-        return yaw;
-    }
-
-    public double getPitch() {
-        return pitch;
-    }
-
     public Location toLocation(@Nullable World world) {
         return new Location(world, getX(), getY(), getZ(), (float) getYaw(), (float) getPitch());
+    }
+
+    @Override
+    public Map<String, Object> serialize() {
+        final var serialized = new HashMap<String, Object>();
+        serialized.put("x", getX());
+        serialized.put("y", getY());
+        serialized.put("z", getZ());
+        serialized.put("yaw", getYaw());
+        serialized.put("pitch", getPitch());
+        return serialized;
+    }
+
+    public static Coordinates deserialize(Map<String, Object> deserialize) {
+        final var x = NumberConversions.toDouble(deserialize.get("x"));
+        final var y = NumberConversions.toDouble(deserialize.get("y"));
+        final var z = NumberConversions.toDouble(deserialize.get("z"));
+        final var triple = Triple.of(x, y, z);
+
+        final var yaw = NumberConversions.toDouble(deserialize.get("yaw"));
+        final var pitch = NumberConversions.toDouble(deserialize.get("pitch"));
+        return new Coordinates(triple.getLeft(), triple.getMiddle(), triple.getRight(), yaw, pitch);
     }
 }
