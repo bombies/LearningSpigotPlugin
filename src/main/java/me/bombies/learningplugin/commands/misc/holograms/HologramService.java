@@ -7,16 +7,16 @@ import me.bombies.learningplugin.utils.config.Config;
 import me.bombies.learningplugin.utils.config.HologramConfig;
 import me.bombies.learningplugin.utils.messages.MessageUtils;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
+import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class HologramService {
 
@@ -33,27 +33,7 @@ public class HologramService {
         holograms.addAll(configHolograms);
 
         // Validate holograms
-        holograms.forEach(hologram -> {
-            final var armorStands = findWorldHologram(hologram);
-            if (armorStands.size() != hologram.getLines().size()
-                    || armorStands.stream().
-                            map(Entity::getCustomName)
-                            .allMatch(name -> hologram.getColoredLines().contains(name))
-            ) {
-                armorStands.forEach(armorStand -> {
-                    final var armorStandData = new PersistentDataHandler(armorStand);
-                    armorStandData.set("hologram_deleted", true);
-                    armorStand.remove();
-                });
-
-                createWorldHologram(
-                        hologram.getWorld(),
-                        hologram.getLocation(),
-                        hologram.getName(),
-                        hologram.getLines()
-                );
-            }
-        });
+        holograms.forEach(HologramService::updateWorldHologram);
     }
 
     /**
@@ -87,9 +67,13 @@ public class HologramService {
      * @throws IllegalArgumentException If hologram with this name already exists
      */
     public static void addHologram(String name, Location location, String text) throws IllegalArgumentException {
+        addHologram(name, location, text, null);
+    }
+
+    public static void addHologram(String name, Location location, String text, @Nullable Material itemMaterial) throws IllegalArgumentException {
         final var world = location.getWorld();
         final var coordinates = new Coordinates(location);
-        final var hologram = new Hologram(name, new ArrayList<>(List.of(text)), world, coordinates);
+        final var hologram = new Hologram(name, new ArrayList<>(List.of(text)), itemMaterial, world, coordinates);
         addHologram(hologram);
     }
 
@@ -121,7 +105,11 @@ public class HologramService {
         armorStands.forEach(Entity::remove);
     }
 
-    public static void createWorldHologram(@Nonnull World world, @Nonnull Location location, @Nonnull String name, List<String> lines) {
+    public static void createWorldHologram(@Nonnull World world, @Nonnull Location location, @Nonnull String name, List<String> lines, @Nullable Material itemMaterial) {
+        final var existingHologram = findWorldHologram(world, location, name, itemMaterial);
+        if (!existingHologram.isEmpty())
+            return;
+
         var prevLocation = location.clone();
         for (String line : lines) {
             final var newLocation = prevLocation.subtract(0, 0.30, 0);
@@ -133,10 +121,82 @@ public class HologramService {
             );
             prevLocation = newLocation;
         }
+
+        if (itemMaterial != null) {
+            final var item = new ItemStack(itemMaterial);
+            final var itemMeta = item.getItemMeta();
+            final var itemData = new PersistentDataHandler(itemMeta);
+            itemData.set("hologram_item", true);
+            itemData.set("hologram", true);
+            itemData.set("hologram_name", name.toLowerCase());
+            item.setItemMeta(itemMeta);
+
+            final var droppedItem = world.dropItem(
+                    new Location(world, Math.floor(location.getX()) + 0.5, prevLocation.getY() + 1, Math.floor(location.getZ()) + 0.5),
+                    item
+            );
+
+            droppedItem.setUnlimitedLifetime(true);
+            droppedItem.setGravity(false);
+            droppedItem.setPickupDelay(Integer.MAX_VALUE);
+        }
     }
 
     public static void createWorldHologram(@Nonnull Player player, @Nonnull String name, @Nullable String text) {
         createWorldHologram(player.getWorld(), player.getLocation(), name, text);
+    }
+
+    public static void updateWorldHologram(@Nonnull Hologram hologram) {
+        final var entities = findWorldHologram(hologram);
+        final var currentLines = hologram.getColoredLines();
+        final var armorStandCount = entities.stream().filter(e -> e.getType() == EntityType.ARMOR_STAND).count();
+        final var floatingItem = entities.stream()
+                .filter(e -> e instanceof Item)
+                .map(e -> (Item) e)
+                .findFirst()
+                .orElse(null);
+
+        if (armorStandCount != hologram.getLines().size()
+                || !entities.stream().map(Entity::getCustomName).toList().equals(currentLines)
+                || (hologram.getItemMaterial() != null && (floatingItem == null || floatingItem.getItemStack()
+                        .getData()
+                        .getItemType() != hologram.getItemMaterial()))
+        ) {
+            entities.forEach(armorStand -> {
+                final var armorStandData = new PersistentDataHandler(armorStand);
+                armorStandData.set("hologram_deleted", true);
+                armorStand.remove();
+            });
+
+            if (floatingItem != null)
+                floatingItem.remove();
+
+            createWorldHologram(
+                    hologram.getWorld(),
+                    hologram.getLocation(),
+                    hologram.getName(),
+                    hologram.getLines(),
+                    hologram.getItemMaterial()
+            );
+        }
+    }
+
+    public static void removeWorldHologram(Hologram hologram, @Nullable Consumer<List<Entity>> onRemove) {
+        final var entities = findWorldHologram(hologram);
+        if (entities.isEmpty())
+            return;
+        entities.forEach(armorStand -> {
+            final var armorStandData = new PersistentDataHandler(armorStand);
+            armorStandData.set("hologram_deleted", true);
+            armorStand.remove();
+        });
+
+        if (onRemove != null)
+            onRemove.accept(entities);
+    }
+
+    public static void removeWorldHologram(Hologram hologram) {
+        removeWorldHologram(hologram, null);
     }
 
 
@@ -146,15 +206,22 @@ public class HologramService {
      * @param hologram The hologram to create
      * @return The hologram or null if it doesn't exist.
      */
-    public static List<ArmorStand> findWorldHologram(Hologram hologram) {
+    public static List<Entity> findWorldHologram(@Nonnull Hologram hologram) {
         final var world = hologram.getWorld();
         final var location = new Location(world, hologram.getCoordinates().getX(), hologram.getCoordinates().getY(), hologram.getCoordinates().getZ());
-        return world.getNearbyEntities(location, 2, 255, 2, e -> e.getType() == EntityType.ARMOR_STAND)
+        return findWorldHologram(world, location, hologram.getName(), hologram.getItemMaterial());
+    }
+
+    public static List<Entity> findWorldHologram(World world, Location location, String name, @Nullable Material itemMaterial) {
+        return world.getNearbyEntities(location, 2, 255, 2, e -> {
+                    if (itemMaterial == null)
+                        return e.getType() == EntityType.ARMOR_STAND;
+                    else return e.getType() == EntityType.ARMOR_STAND || e.getType() == EntityType.DROPPED_ITEM;
+                })
                 .stream()
-                .map(entity -> (ArmorStand) entity)
-                .filter(armorStand -> {
-                    final var armorStandData = new PersistentDataHandler(armorStand);
-                    return armorStandData.getString("hologram_name").equalsIgnoreCase(hologram.getName());
+                .filter(entity -> {
+                    final var entityData = new PersistentDataHandler(entity);
+                    return entityData.getString("hologram_name").equalsIgnoreCase(name);
                 })
                 .toList();
     }

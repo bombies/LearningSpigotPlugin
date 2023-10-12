@@ -1,13 +1,17 @@
 package me.bombies.learningplugin.commands.utils;
 
+import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
 public class CommandContext {
+    @Getter
     private final Player player;
+    @Getter
     private final Command command;
+    @Getter
     private final String label;
     private final List<String> args;
 
@@ -16,18 +20,6 @@ public class CommandContext {
         this.command = command;
         this.label = label;
         this.args = args;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public Command getCommand() {
-        return command;
-    }
-
-    public String getLabel() {
-        return label;
     }
 
     public CommandArgs getArgs() {

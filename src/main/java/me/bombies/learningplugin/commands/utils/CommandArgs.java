@@ -45,4 +45,9 @@ public class CommandArgs {
     public List<String> all() {
         return this.args;
     }
+
+    @Override
+    public String toString() {
+        return args.toString();
+    }
 }

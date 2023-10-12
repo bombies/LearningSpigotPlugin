@@ -24,9 +24,7 @@ public class HologramEventListener implements Listener {
         if (!isHologram(entity))
             return;
 
-        final var armorStand = (ArmorStand) entity;
-        final var hologramData = new PersistentDataHandler(armorStand);
-
+        final var hologramData = new PersistentDataHandler(entity);
         final var deleted = hologramData.getBoolean("hologram_deleted");
         if (deleted)
             return;
@@ -40,15 +38,13 @@ public class HologramEventListener implements Listener {
                 hologram.getWorld(),
                 hologram.getLocation(),
                 hologram.getName(),
-                hologram.getLines()
+                hologram.getLines(),
+                hologram.getItemMaterial()
         );
     }
 
     private boolean isHologram(Entity entity) {
-        if (!(entity instanceof ArmorStand armorStand))
-            return false;
-
-        final var armorStandData = new PersistentDataHandler(armorStand);
-        return armorStandData.getBoolean("hologram");
+        final var entityData = new PersistentDataHandler(entity);
+        return entityData.getBoolean("hologram");
     }
 }
