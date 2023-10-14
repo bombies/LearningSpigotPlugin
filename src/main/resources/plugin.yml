@@ -6,6 +6,8 @@ authors: [ Ajani Green (bombies) ]
 description: This is Ajani's first Spigot plugin
 website: https://ajani.me/
 
+softdepend: [PlaceholderAPI]
+
 commands:
   login:
     description: Login to the server
@@ -56,6 +58,11 @@ commands:
     aliases: [ hologram, holo ]
   sign:
     description: Create a sign??
+  ping:
+    description: Check your ping
+  randomteleport:
+    description: Teleport to a random location
+    aliases: [ rtp, randomtp ]
 permissions:
   learningplugin.*:
     description: Gives a user access to every permission
