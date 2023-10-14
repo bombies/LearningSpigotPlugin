@@ -54,6 +54,8 @@ commands:
   holograms:
     description: View and manage holograms
     aliases: [ hologram, holo ]
+  sign:
+    description: Create a sign??
 permissions:
   learningplugin.*:
     description: Gives a user access to every permission
