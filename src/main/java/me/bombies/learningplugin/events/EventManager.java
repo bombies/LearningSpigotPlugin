@@ -5,6 +5,7 @@ import me.bombies.learningplugin.commands.management.spawn.events.RespawnTelepor
 import me.bombies.learningplugin.commands.menu.CustomMenu;
 import me.bombies.learningplugin.commands.misc.holograms.HologramEventListener;
 import me.bombies.learningplugin.commands.misc.invsee.InventorySeeMoveEventListener;
+import me.bombies.learningplugin.commands.misc.nuke.NukeEventListener;
 import me.bombies.learningplugin.commands.misc.signs.SignEvents;
 import me.bombies.learningplugin.commands.teleportbow.TeleportBowEventListener;
 import me.bombies.learningplugin.events.customchat.CustomChatEventListener;
@@ -40,7 +41,8 @@ public class EventManager {
                 new InventorySeeMoveEventListener(),
                 new TeleportBowEventListener(),
                 new HologramEventListener(),
-                new SignEvents()
+                new SignEvents(),
+                new NukeEventListener()
         );
     }
 

@@ -16,6 +16,7 @@ import me.bombies.learningplugin.commands.misc.fly.FlyCommand;
 import me.bombies.learningplugin.commands.misc.login.LoginCommand;
 import me.bombies.learningplugin.commands.misc.SuicideCommand;
 import me.bombies.learningplugin.commands.misc.nick.NickCommand;
+import me.bombies.learningplugin.commands.misc.nuke.NukeCommand;
 import me.bombies.learningplugin.commands.misc.signs.SignCommand;
 import me.bombies.learningplugin.commands.teleportbow.TeleportBowCommand;
 import org.bukkit.command.PluginCommand;
@@ -50,7 +51,8 @@ public class CommandManager {
                 new HologramCommand(),
                 new SignCommand(),
                 new PingCommand(),
-                new RandomTeleportCommand()
+                new RandomTeleportCommand(),
+                new NukeCommand()
         );
     }
 
