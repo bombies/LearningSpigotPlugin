@@ -12,6 +12,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.TimeUnit;
@@ -32,15 +34,22 @@ public class NukeEventListener implements Listener {
 
         event.setCancelled(true);
 
+        final var player = event.getPlayer();
+        if (player.getGameMode() != org.bukkit.GameMode.CREATIVE)
+            event.getItemInHand().setAmount(itemInHand.getAmount() - 1);
+
         final var placedLocation = event.getBlockPlaced().getLocation();
         if (placedLocation.getWorld() == null)
             return;
 
+        final int SECONDS_BEFORE_DETONATION = 10;
+        final int BLAST_RADIUS = 100;
+
         final var spawnedEntity = (TNTPrimed) placedLocation.getWorld().spawnEntity(placedLocation, EntityType.PRIMED_TNT);
-        spawnedEntity.setFuseTicks(20 * 11);
+        spawnedEntity.setFuseTicks(20 * (SECONDS_BEFORE_DETONATION + 1));
 
         final var countDownRunnable = new BukkitRunnable() {
-            final long detonationTime = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(10);
+            final long detonationTime = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(SECONDS_BEFORE_DETONATION);
             private boolean detonated = false;
 
             @Override
@@ -55,10 +64,17 @@ public class NukeEventListener implements Listener {
 
                 if (System.currentTimeMillis() >= detonationTime) {
                     spawnedEntity.remove();
-                    world.createExplosion(tntLocation, 100, true, true);
+                    world.createExplosion(tntLocation, Math.min(200, BLAST_RADIUS), true, true);
+
+                    // If anyone's still alive
+                    world.getNearbyEntities(tntLocation, BLAST_RADIUS, BLAST_RADIUS, BLAST_RADIUS, entity -> entity instanceof Player)
+                            .forEach(entity -> {
+                                final var player = (Player) entity;
+                                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 10, 1));
+                            });
                     detonated = true;
                 } else {
-                    world.getNearbyEntities(tntLocation, 100, 100, 100, entity -> entity instanceof Player)
+                    world.getNearbyEntities(tntLocation, BLAST_RADIUS, BLAST_RADIUS, BLAST_RADIUS, entity -> entity instanceof Player)
                             .forEach(entity -> {
                                 final var player = (Player) entity;
                                 player.sendTitle(MessageUtils.color("&e&l☣☣☣ &c&lNUKE DETONATION&e&l☣☣☣"), MessageUtils.color("&c&lIN " + TimeUnit.MILLISECONDS.toSeconds(detonationTime - System.currentTimeMillis()) + " SECONDS"), 0, 20, 0);
@@ -67,7 +83,7 @@ public class NukeEventListener implements Listener {
             }
         };
 
-        countDownRunnable.runTaskTimer(LearningPlugin.core, 0, 20 * 1);
+        countDownRunnable.runTaskTimer(LearningPlugin.core, 0, 20 * SECONDS_BEFORE_DETONATION);
     }
 
     @EventHandler
