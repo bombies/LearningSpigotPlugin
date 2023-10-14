@@ -69,7 +69,8 @@ public class Hologram implements ConfigurationSerializable {
         serialized.put("lines", lines);
         serialized.put("world", world.getName());
         serialized.put("coordinates", coordinates);
-        serialized.put("item", itemMaterial.name());
+        if (itemMaterial != null)
+            serialized.put("item", itemMaterial.name());
         return serialized;
     }
 

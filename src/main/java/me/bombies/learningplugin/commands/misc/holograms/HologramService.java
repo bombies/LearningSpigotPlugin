@@ -1,6 +1,7 @@
 package me.bombies.learningplugin.commands.misc.holograms;
 
 import lombok.Getter;
+import me.bombies.learningplugin.LearningPlugin;
 import me.bombies.learningplugin.utils.PersistentDataHandler;
 import me.bombies.learningplugin.utils.classes.Coordinates;
 import me.bombies.learningplugin.utils.config.Config;
@@ -72,7 +73,7 @@ public class HologramService {
 
     public static void addHologram(String name, Location location, String text, @Nullable Material itemMaterial) throws IllegalArgumentException {
         final var world = location.getWorld();
-        final var coordinates = new Coordinates(location);
+        final var coordinates = new Coordinates(new Location(world, Math.floor(location.getX()) + 0.5, location.getY(), Math.floor(location.getZ()) + 0.5));
         final var hologram = new Hologram(name, new ArrayList<>(List.of(text)), itemMaterial, world, coordinates);
         addHologram(hologram);
     }
@@ -110,7 +111,7 @@ public class HologramService {
         if (!existingHologram.isEmpty())
             return;
 
-        var prevLocation = location.clone();
+        var prevLocation = new Location(world, Math.floor(location.getX()) + 0.5, location.getY(), Math.floor(location.getZ()) + 0.5);
         for (String line : lines) {
             final var newLocation = prevLocation.subtract(0, 0.30, 0);
             createWorldHologram(
@@ -132,13 +133,14 @@ public class HologramService {
             item.setItemMeta(itemMeta);
 
             final var droppedItem = world.dropItem(
-                    new Location(world, Math.floor(location.getX()) + 0.5, prevLocation.getY() + 1, Math.floor(location.getZ()) + 0.5),
+                    new Location(world, location.getX(), location.getY() + 0.25, location.getZ()),
                     item
             );
 
             droppedItem.setUnlimitedLifetime(true);
             droppedItem.setGravity(false);
             droppedItem.setPickupDelay(Integer.MAX_VALUE);
+            droppedItem.setVelocity(droppedItem.getVelocity().zero());
         }
     }
 
@@ -159,8 +161,9 @@ public class HologramService {
         if (armorStandCount != hologram.getLines().size()
                 || !entities.stream().map(Entity::getCustomName).toList().equals(currentLines)
                 || (hologram.getItemMaterial() != null && (floatingItem == null || floatingItem.getItemStack()
-                        .getData()
-                        .getItemType() != hologram.getItemMaterial()))
+                .getData()
+                .getItemType() != hologram.getItemMaterial()))
+                || hologram.getItemMaterial() == null && floatingItem != null
         ) {
             entities.forEach(armorStand -> {
                 final var armorStandData = new PersistentDataHandler(armorStand);
@@ -213,15 +216,17 @@ public class HologramService {
     }
 
     public static List<Entity> findWorldHologram(World world, Location location, String name, @Nullable Material itemMaterial) {
-        return world.getNearbyEntities(location, 2, 255, 2, e -> {
-                    if (itemMaterial == null)
-                        return e.getType() == EntityType.ARMOR_STAND;
-                    else return e.getType() == EntityType.ARMOR_STAND || e.getType() == EntityType.DROPPED_ITEM;
-                })
+        return world.getNearbyEntities(location, 2, 255, 2, e -> e.getType() == EntityType.ARMOR_STAND || e.getType() == EntityType.DROPPED_ITEM)
                 .stream()
                 .filter(entity -> {
-                    final var entityData = new PersistentDataHandler(entity);
-                    return entityData.getString("hologram_name").equalsIgnoreCase(name);
+                    final PersistentDataHandler entityData;
+                    if (entity instanceof Item item)
+                        entityData = new PersistentDataHandler(item.getItemStack().getItemMeta());
+                    else
+                        entityData = new PersistentDataHandler(entity);
+
+                    final var holoName = entityData.getString("hologram_name");
+                    return holoName != null && holoName.equalsIgnoreCase(name);
                 })
                 .toList();
     }

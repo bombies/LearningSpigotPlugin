@@ -1,8 +1,6 @@
 package me.bombies.learningplugin.commands.misc.holograms;
 
-import me.bombies.learningplugin.LearningPlugin;
 import me.bombies.learningplugin.utils.PersistentDataHandler;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
