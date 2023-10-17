@@ -15,6 +15,7 @@ import me.bombies.learningplugin.commands.misc.login.LoginCommand;
 import me.bombies.learningplugin.commands.misc.nick.NickCommand;
 import me.bombies.learningplugin.commands.misc.nuke.NukeCommand;
 import me.bombies.learningplugin.commands.misc.signs.SignCommand;
+import me.bombies.learningplugin.commands.misc.spawner.SpawnerCommand;
 import me.bombies.learningplugin.commands.teleportbow.TeleportBowCommand;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -50,7 +51,8 @@ public class CommandManager {
                 new PingCommand(),
                 new RandomTeleportCommand(),
                 new NukeCommand(),
-                new GameEndCommand()
+                new GameEndCommand(),
+                new SpawnerCommand()
         );
     }
 

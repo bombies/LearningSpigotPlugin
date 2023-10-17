@@ -73,4 +73,9 @@ public class Coordinates implements ConfigurationSerializable {
         final var pitch = NumberConversions.toDouble(deserialize.get("pitch"));
         return new Coordinates(triple.getLeft(), triple.getMiddle(), triple.getRight(), yaw, pitch);
     }
+
+    @Override
+    public String toString() {
+        return "X:%f, Y:%f, Z:%f".formatted(getX(), getY(), getZ());
+    }
 }

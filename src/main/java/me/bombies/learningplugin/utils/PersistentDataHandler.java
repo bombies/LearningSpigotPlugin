@@ -5,6 +5,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 
+import javax.annotation.Nullable;
+
 public class PersistentDataHandler {
     private final PersistentDataHolder persistentDataHolder;
 
@@ -32,9 +34,14 @@ public class PersistentDataHandler {
                 .set(new NamespacedKey(LearningPlugin.core, key), PersistentDataType.BOOLEAN, value);
     }
 
+    @Nullable
     public String getString(String key) {
-        return persistentDataHolder.getPersistentDataContainer()
-                .get(new NamespacedKey(LearningPlugin.core, key), PersistentDataType.STRING);
+        try {
+            return persistentDataHolder.getPersistentDataContainer()
+                    .get(new NamespacedKey(LearningPlugin.core, key), PersistentDataType.STRING);
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 
     public String getString(NamespacedKey key) {

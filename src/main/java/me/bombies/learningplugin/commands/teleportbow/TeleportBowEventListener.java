@@ -52,11 +52,8 @@ public class TeleportBowEventListener implements Listener {
     public void onArrowShoot(ProjectileLaunchEvent event) {
         final var entity = event.getEntity();
         final var shooter = entity.getShooter();
-        if (entity.getType() != EntityType.ARROW && !(shooter instanceof Player))
+        if (entity.getType() != EntityType.ARROW || !(shooter instanceof Player player))
             return;
-
-        final var player = (Player) shooter;
-        assert player != null;
 
         final var itemInMainMainHand = player.getInventory().getItemInMainHand();
         final var mainHandItemMeta = itemInMainMainHand.getItemMeta();
