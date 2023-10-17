@@ -11,7 +11,6 @@ import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -46,7 +45,7 @@ public class NukeEventListener implements Listener {
         final int BLAST_RADIUS = 100;
 
         final var spawnedEntity = (TNTPrimed) placedLocation.getWorld().spawnEntity(placedLocation, EntityType.PRIMED_TNT);
-        spawnedEntity.setFuseTicks(20 * (SECONDS_BEFORE_DETONATION + 1));
+        spawnedEntity.setFuseTicks(20 * SECONDS_BEFORE_DETONATION);
 
         final var countDownRunnable = new BukkitRunnable() {
             final long detonationTime = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(SECONDS_BEFORE_DETONATION);
@@ -64,14 +63,7 @@ public class NukeEventListener implements Listener {
 
                 if (System.currentTimeMillis() >= detonationTime) {
                     spawnedEntity.remove();
-                    world.createExplosion(tntLocation, Math.min(200, BLAST_RADIUS), true, true);
-
-                    // If anyone's still alive
-                    world.getNearbyEntities(tntLocation, BLAST_RADIUS, BLAST_RADIUS, BLAST_RADIUS, entity -> entity instanceof Player)
-                            .forEach(entity -> {
-                                final var player = (Player) entity;
-                                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 10, 1));
-                            });
+                    detonate(tntLocation, BLAST_RADIUS);
                     detonated = true;
                 } else {
                     world.getNearbyEntities(tntLocation, BLAST_RADIUS, BLAST_RADIUS, BLAST_RADIUS, entity -> entity instanceof Player)
@@ -86,8 +78,18 @@ public class NukeEventListener implements Listener {
         countDownRunnable.runTaskTimer(LearningPlugin.core, 0, 20 * SECONDS_BEFORE_DETONATION);
     }
 
-    @EventHandler
-    public void onExplosionDamage(EntityDamageByEntityEvent e) {
+    private void detonate(Location location, int blastRadius) {
+        final var world = location.getWorld();
+        if (world == null)
+            return;
 
+        world.createExplosion(location, Math.min(200, blastRadius), true, true);
+
+        // If anyone's still alive
+        world.getNearbyEntities(location, blastRadius, blastRadius, blastRadius, entity -> entity instanceof Player)
+                .forEach(entity -> {
+                    final var player = (Player) entity;
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 10, 1));
+                });
     }
 }

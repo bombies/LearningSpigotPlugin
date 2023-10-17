@@ -2,7 +2,6 @@ package me.bombies.learningplugin.events;
 
 import me.bombies.learningplugin.LearningPlugin;
 import me.bombies.learningplugin.commands.management.spawn.events.RespawnTeleportEventListener;
-import me.bombies.learningplugin.commands.menu.CustomMenu;
 import me.bombies.learningplugin.commands.misc.holograms.HologramEventListener;
 import me.bombies.learningplugin.commands.misc.invsee.InventorySeeMoveEventListener;
 import me.bombies.learningplugin.commands.misc.nuke.NukeEventListener;
