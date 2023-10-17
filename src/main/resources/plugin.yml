@@ -65,6 +65,8 @@ commands:
     aliases: [ rtp, randomtp ]
   nuke:
     description:  Give yourself a nuke
+  gameend:
+    description: Test custom events
 permissions:
   learningplugin.*:
     description: Gives a user access to every permission

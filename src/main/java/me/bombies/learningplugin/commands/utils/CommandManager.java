@@ -6,15 +6,12 @@ import me.bombies.learningplugin.commands.management.spawn.SetSpawnCommand;
 import me.bombies.learningplugin.commands.management.spawn.SpawnCommand;
 import me.bombies.learningplugin.commands.management.worlds.WorldsCommand;
 import me.bombies.learningplugin.commands.menu.MenuCommand;
-import me.bombies.learningplugin.commands.misc.PingCommand;
-import me.bombies.learningplugin.commands.misc.RandomTeleportCommand;
+import me.bombies.learningplugin.commands.misc.*;
 import me.bombies.learningplugin.commands.misc.chatcolor.ChatColorCommand;
 import me.bombies.learningplugin.commands.misc.holograms.HologramCommand;
 import me.bombies.learningplugin.commands.misc.invsee.InventorySeeCommand;
-import me.bombies.learningplugin.commands.misc.WorkBenchCommand;
 import me.bombies.learningplugin.commands.misc.fly.FlyCommand;
 import me.bombies.learningplugin.commands.misc.login.LoginCommand;
-import me.bombies.learningplugin.commands.misc.SuicideCommand;
 import me.bombies.learningplugin.commands.misc.nick.NickCommand;
 import me.bombies.learningplugin.commands.misc.nuke.NukeCommand;
 import me.bombies.learningplugin.commands.misc.signs.SignCommand;
@@ -52,7 +49,8 @@ public class CommandManager {
                 new SignCommand(),
                 new PingCommand(),
                 new RandomTeleportCommand(),
-                new NukeCommand()
+                new NukeCommand(),
+                new GameEndCommand()
         );
     }
 

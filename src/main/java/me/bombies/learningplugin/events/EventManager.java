@@ -5,11 +5,13 @@ import me.bombies.learningplugin.commands.management.spawn.events.RespawnTelepor
 import me.bombies.learningplugin.commands.misc.holograms.HologramEventListener;
 import me.bombies.learningplugin.commands.misc.invsee.InventorySeeMoveEventListener;
 import me.bombies.learningplugin.commands.misc.nuke.NukeEventListener;
-import me.bombies.learningplugin.commands.misc.signs.SignEvents;
+import me.bombies.learningplugin.commands.misc.signs.SignEventListener;
 import me.bombies.learningplugin.commands.teleportbow.TeleportBowEventListener;
+import me.bombies.learningplugin.events.custom.GameListener;
 import me.bombies.learningplugin.events.customchat.CustomChatEventListener;
 import me.bombies.learningplugin.events.weather.RainEventListener;
 import me.bombies.learningplugin.events.welcomer.PlayerWelcomeEventListener;
+import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -40,8 +42,9 @@ public class EventManager {
                 new InventorySeeMoveEventListener(),
                 new TeleportBowEventListener(),
                 new HologramEventListener(),
-                new SignEvents(),
-                new NukeEventListener()
+                new SignEventListener(),
+                new NukeEventListener(),
+                new GameListener()
         );
     }
 
@@ -54,6 +57,10 @@ public class EventManager {
         if (instance == null)
             instance = new EventManager();
         return instance;
+    }
+
+    public static <E extends Event> void call(E event) {
+        LearningPlugin.core.getServer().getPluginManager().callEvent(event);
     }
 
     private void addListeners(Listener... listeners) {
