@@ -9,8 +9,10 @@ import me.bombies.learningplugin.commands.misc.signs.SignEventListener;
 import me.bombies.learningplugin.commands.teleportbow.TeleportBowEventListener;
 import me.bombies.learningplugin.events.custom.GameListener;
 import me.bombies.learningplugin.events.customchat.CustomChatEventListener;
+import me.bombies.learningplugin.events.scoreboard.ScoreboardPlayerLoginEventListener;
 import me.bombies.learningplugin.events.silkspawners.SilkSpawnerBreakListener;
 import me.bombies.learningplugin.events.silkspawners.SilkSpawnerPlaceListener;
+import me.bombies.learningplugin.events.weather.AlwaysDayEventListener;
 import me.bombies.learningplugin.events.weather.RainEventListener;
 import me.bombies.learningplugin.events.welcomer.PlayerWelcomeEventListener;
 import org.bukkit.event.Event;
@@ -48,7 +50,9 @@ public class EventManager {
                 new NukeEventListener(),
                 new GameListener(),
                 new SilkSpawnerBreakListener(),
-                new SilkSpawnerPlaceListener()
+                new SilkSpawnerPlaceListener(),
+                new AlwaysDayEventListener(),
+                new ScoreboardPlayerLoginEventListener()
         );
     }
 

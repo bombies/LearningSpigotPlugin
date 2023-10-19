@@ -12,12 +12,7 @@ public class InventorySeeMoveEventListener implements Listener {
     public void onItemMove(InventoryClickEvent e) {
         final var inventory = e.getClickedInventory();
         final var player = (Player) e.getWhoClicked();
-
-        if (inventory == null)
-            return;
-
-        final var holder = (Player) inventory.getHolder();
-        if (holder == null)
+        if (inventory == null || !(inventory.getHolder() instanceof Player holder))
             return;
 
         if (player.getUniqueId() != holder.getUniqueId() && !player.hasPermission(Permissions.INV_SEE_MOVE))
